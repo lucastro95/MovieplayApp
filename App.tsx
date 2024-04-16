@@ -7,14 +7,14 @@ import I18n from './app/assets/strings/l18n';
 import SplashScreen from 'react-native-splash-screen';
 
 function App(): React.JSX.Element {
-  
+
   useEffect(() => {
     SplashScreen.hide();
   }, [])
 
   return (
     <View>
-      <Text>{I18n.t('hola')}</Text>
+      <Text>{I18n.t('movie.release')}</Text>
     </View>
   );
 }
