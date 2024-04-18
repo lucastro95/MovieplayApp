@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import {
-  Text,
   View,
 } from 'react-native';
-import I18n from './app/assets/strings/l18n';
 import SplashScreen from 'react-native-splash-screen';
+import Button from './app/ui/components/Button';
 
 function App(): React.JSX.Element {
 
@@ -14,7 +13,7 @@ function App(): React.JSX.Element {
 
   return (
     <View>
-      <Text>{I18n.t('movie.release')}</Text>
+      <Button text={"Send"} action={() => {}}/>
     </View>
   );
 }
