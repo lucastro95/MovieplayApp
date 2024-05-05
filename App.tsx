@@ -4,6 +4,8 @@ import {
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import Button from './app/ui/components/Button';
+import { NavigationContainer } from '@react-navigation/native';
+import RootNavigator from './app/navigation/RootNavigator';
 
 function App(): React.JSX.Element {
 
@@ -12,9 +14,7 @@ function App(): React.JSX.Element {
   }, [])
 
   return (
-    <View>
-      <Button text={"Send"} action={() => {}}/>
-    </View>
+    <RootNavigator />
   );
 }
 
