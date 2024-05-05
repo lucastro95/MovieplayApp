@@ -1,8 +1,26 @@
-import TabBar from "./TabBar"
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import Home from "../ui/screens/Home"
+
+const Stack = createNativeStackNavigator()
 
 const LandingStackNavigator = () => {
   return (
-    <TabBar />
+    <>
+      <Stack.Navigator
+        initialRouteName="HomeScreen"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen 
+          name="HomeScreen"
+          component={Home}
+          options={{
+            statusBarHidden: true
+          }}
+        />
+      </Stack.Navigator>
+    </>
   )
 }
 

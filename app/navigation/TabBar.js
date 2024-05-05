@@ -7,21 +7,22 @@ import { colors } from "../ui/styles/RootColors";
 import Search from "../ui/screens/Search";
 import Favourites from "../ui/screens/Favourites";
 import Profile from "../ui/screens/Profile";
+import LandingStackNavigator from "./LandingStackNavigator";
 
 const Tab = createBottomTabNavigator()
 
 const TabBar = () => {
   return (
     <Tab.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="LandingStackNavigator"
       screenOptions={{
         tabBarStyle: { backgroundColor: colors.blue, height: 70 },
         headerShown: false,
       }}
     >
       <Tab.Screen
-        name="HomeScreen"
-        component={Home}
+        name="LandingStackNavigator"
+        component={LandingStackNavigator}
         options={{
           tabBarShowLabel: false,
           tabBarIcon: ({ focused }) => (

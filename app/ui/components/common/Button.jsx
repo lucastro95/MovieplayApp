@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableHighlight } from 'react-native'
-import { colors } from '../styles/RootColors'
+import { colors } from '../../styles/RootColors'
 
 const Button = ({ text, action }) => {
   return (

@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LandingStackNavigator from "./LandingStackNavigator";
+import TabBar from "./TabBar";
 
 const Stack = createNativeStackNavigator()
 
@@ -8,12 +8,12 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
         <Stack.Navigator
-            initialRouteName="LandingStackNavigator"
+            initialRouteName="TabBar"
             screenOptions={{headerShown: false}}
         >
             <Stack.Screen 
-                name="LandingStackNavigator"
-                component={LandingStackNavigator}
+                name="TabBar"
+                component={TabBar}
             />
         </Stack.Navigator>
     </NavigationContainer>
