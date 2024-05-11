@@ -8,20 +8,21 @@ import Search from "../ui/screens/Search";
 import Favourites from "../ui/screens/Favourites";
 import Profile from "../ui/screens/Profile";
 import LandingStackNavigator from "./LandingStackNavigator";
+import Routes from "./Routes";
 
 const Tab = createBottomTabNavigator()
 
 const TabBar = () => {
   return (
     <Tab.Navigator
-      initialRouteName="LandingStackNavigator"
+      initialRouteName={Routes.LandingStackNavigator}
       screenOptions={{
         tabBarStyle: { backgroundColor: colors.blue, height: 70 },
         headerShown: false,
       }}
     >
       <Tab.Screen
-        name="LandingStackNavigator"
+        name={Routes.LandingStackNavigator}
         component={LandingStackNavigator}
         options={{
           tabBarShowLabel: false,
@@ -31,7 +32,7 @@ const TabBar = () => {
         }}
       />
       <Tab.Screen
-        name="SearchScreen"
+        name={Routes.SearchScreen}
         component={Search}
         options={{
           tabBarShowLabel: false,
@@ -41,7 +42,7 @@ const TabBar = () => {
         }}
       />
       <Tab.Screen
-        name="FavouritesScreen"
+        name={Routes.FavouritesScreen}
         component={Favourites}
         options={{
           tabBarShowLabel: false,
@@ -51,7 +52,7 @@ const TabBar = () => {
         }}
       />
       <Tab.Screen
-        name="ProfileScreen"
+        name={Routes.ProfileScreen}
         component={Profile}
         options={{
           tabBarShowLabel: false,

@@ -2,6 +2,7 @@ import React from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../styles/RootColors';
 import LoginForm from '../components/login/LoginForm';
+import I18n from '../../assets/strings/l18n';
 
 const LogIn = () => {
   return (
@@ -12,6 +13,9 @@ const LogIn = () => {
         style={styles.background}>
         <View style={styles.overlay} />
         <LoginForm />
+        <View style={styles.terms}>
+          <Text style={styles.termsText}>{I18n.t('signIn.terms')}</Text>
+        </View>
       </ImageBackground>
     </View>
   );
@@ -40,6 +44,20 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
+  terms: {
+    width: '100%',
+    height: '10%',
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: 0,
+    left:0,
+    backgroundColor: `${colors.black}`
+  },
+  termsText: {
+    fontSize: 15,
+    color: `${colors.white}`
+  }
 });
 
 export default LogIn;
