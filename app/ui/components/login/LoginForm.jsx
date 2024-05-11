@@ -1,20 +1,31 @@
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text, View, TouchableHighlight } from "react-native"
 import { colors } from "../../styles/RootColors"
 import Icon from 'react-native-vector-icons/Fontisto';
 import I18n from "../../../assets/strings/l18n"
+import { useNavigation } from "@react-navigation/native";
 
 const LoginForm = () => {
+
+  const navigation = useNavigation()
+
+  const handleLogin = () => {
+    navigation.push('TabBar')
+  }
+
   return (
     <View style={styles.container}>
         <View style={styles.form}>
           <Text style={styles.text}>{I18n.t('signIn.sign')}</Text>
-          <View style={styles.googlebtn}>
+          <TouchableHighlight 
+            style={styles.googlebtn} 
+            underlayColor={colors.black}
+            onPress={handleLogin}>
             <Icon
               name='google'
               color={colors.blue}
-              size={50}
+              size={40}
               />
-          </View>
+          </TouchableHighlight>
         </View>
     </View>
   )
@@ -29,7 +40,8 @@ const styles = StyleSheet.create({
     },
     form: {
       width: '80%',
-      height: '40%',
+      height: '25%',
+      padding: 20,
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: `${colors.blue}`
@@ -37,10 +49,11 @@ const styles = StyleSheet.create({
     text: {
       fontFamily: 'Roboto',
       color: `${colors.white}`,
-      fontSize: 20
+      fontSize: 25
     },
     googlebtn: {
       padding: 15,
+      margin: 30,
       borderRadius: 50,
       backgroundColor: `${colors.pink}`
     }
