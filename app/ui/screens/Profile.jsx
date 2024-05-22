@@ -8,8 +8,11 @@ const Profile = () => {
 
     return (
         <View style={styles.container}>
-          <View style = {styles.imageContainer}>
-            <Image style={styles.image} source={{ uri: 'https://blog.gleeden.com/es/wp-content/uploads/2013/12/shutterstock_61191451.jpg' }} /> 
+          <View style = {styles.imageSpace}>
+            <View style = {styles.imageContainer}>
+              <Image style={styles.image} source={{ uri: 'https://blog.gleeden.com/es/wp-content/uploads/2013/12/shutterstock_61191451.jpg' }} /> 
+            </View>
+            <EditField iconName={'plus-circle'} size = {30}/>
           </View>
           <View style = {styles.infoBox1} >
             <Text style = {styles.usernameText} numberOfLines={1}>Tu nombre de usuario</Text>
@@ -61,7 +64,9 @@ const styles = StyleSheet.create({
       },
 
       editButton: {
-        height: '100%',
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
       },
 
       namesText: {
@@ -70,26 +75,32 @@ const styles = StyleSheet.create({
         paddingHorizontal: '5%',
         color: `${colors.white}`
       },
-
-      imageContainer: {
+      imageSpace: {
         marginTop: '20%',
         width: '55%',
         aspectRatio: 1,
+      },
+
+      imageContainer: {
+        width: '100%',
+        aspectRatio: 1,
         borderRadius: 999,
-        overflow: 'hidden',
       }, 
+
         image: {
           borderColor: colors.pink,
           borderWidth: 5,
           borderRadius: 999,
           flex: 1
         },
-        editImage: {
-          height: '200%',
 
-
+        editImageButton: {
+          marginBottom: 0,
+          marginRight: 0
         },
+
         buttonContainer: {
+          marginTop: '5%',
           flex: 1,
           flexDirection: 'center',
           alignItems: 'center',

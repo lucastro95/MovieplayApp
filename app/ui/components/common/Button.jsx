@@ -15,8 +15,9 @@ const styles = StyleSheet.create ({
         padding: 15,
         backgroundColor: colors.pink,
         borderRadius: 50,
-        
+        margin: '5%',
     },
+
     text: {
         color: colors.white,
         fontFamily: "Roboto",

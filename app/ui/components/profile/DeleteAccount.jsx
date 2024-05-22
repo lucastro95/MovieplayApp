@@ -16,8 +16,8 @@ const DeleteAccount = () => {
 
 const styles = StyleSheet.create({
   container: {
-     justifyContent: 'center',
-     alignItems: 'center',
+    justifyContent: 'center',
+    width: '60%'
   },
 });
 

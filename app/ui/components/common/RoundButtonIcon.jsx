@@ -20,14 +20,14 @@ const styles = StyleSheet.create ({
         borderRadius: 999,
         height: '100%',
         aspectRatio: 1,
-        alignContent: 'center',
-        justifyContent: 'center',
+
       },
       iconContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%',
-        height: '100%',
+        bottom: 0,
+        width: '120%',
+        height: '100%'
       },
 })
 

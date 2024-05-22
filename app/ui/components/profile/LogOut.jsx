@@ -20,9 +20,8 @@ const LogOut = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.5,
     justifyContent: 'center',
-    alignItems: 'center',
+    width: '60%'
   },
 
 });
