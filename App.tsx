@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import RootNavigator from './app/navigation/RootNavigator';
+import {Provider} from 'react-redux'
+import store from './app/redux/Store';
 
 function App(): React.JSX.Element {
 
@@ -9,7 +11,9 @@ function App(): React.JSX.Element {
   }, [])
 
   return (
-    <RootNavigator />
+    <Provider store={store}>
+      <RootNavigator />
+    </Provider>
   );
 }
 
