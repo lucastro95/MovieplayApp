@@ -10,12 +10,7 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Header/>
-      <MovieList 
-        onScroll = {Animated.event(
-          [{nativeEvent: { contentOffset: {y: scrollY}}}],
-          {useNativeDriver: false}
-        )}
-      />
+      <MovieList/>
     </SafeAreaView>
   )
 }

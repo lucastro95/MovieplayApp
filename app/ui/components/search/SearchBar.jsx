@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         paddingTop: 50,
-        flex: 1,
         alignItems: 'center'
     },
     searchBar: {
