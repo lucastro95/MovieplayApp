@@ -12,10 +12,10 @@ const OrderBy = ( {text, action, iconName}) => {
     };
     const handleOrderBy = () => {
         if (action === 'orderByDate') {
-            action = orderByDate();
-        } else {
-            action = orderByRate();
-        }
+            orderByDate();
+        } else if (action === 'orderByRate'){
+            orderByRate();
+        } 
       };
 
     return (
@@ -24,6 +24,7 @@ const OrderBy = ( {text, action, iconName}) => {
         </View>
     );
 };
+
 
 ;
 
