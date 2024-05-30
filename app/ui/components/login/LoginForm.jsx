@@ -1,16 +1,37 @@
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native"
+import { StyleSheet, Text, View, TouchableHighlight, Alert } from "react-native"
 import { colors } from "../../styles/RootColors"
 import Icon from 'react-native-vector-icons/Fontisto';
 import I18n from "../../../assets/strings/l18n"
 import { useNavigation } from "@react-navigation/native";
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+import { useEffect } from "react";
 
 const LoginForm = () => {
 
   const navigation = useNavigation()
 
-  const handleLogin = () => {
-    navigation.push('TabBarStack')
-  }
+  useEffect(() => {
+    GoogleSignin.configure({
+      androidClientId: '384932721096-qridf4h29h4il294g6rgguo0c6ueb3m6.apps.googleusercontent.com',
+    });
+  }, []);
+
+
+  const handleLogin = async () => {
+    try {
+      console.log("algo");
+      await GoogleSignin.hasPlayServices();
+      console.log("algo 2");
+      const userInfo = await GoogleSignin.signIn();
+      console.log("algo 3");
+      console.log({ userInfo, error: undefined });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={styles.container}>
