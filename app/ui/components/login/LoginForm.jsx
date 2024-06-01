@@ -2,16 +2,21 @@ import { StyleSheet, Text, View, TouchableHighlight, Alert } from "react-native"
 import { colors } from "../../styles/RootColors"
 import Icon from 'react-native-vector-icons/Fontisto';
 import I18n from "../../../assets/strings/l18n"
-import { useNavigation } from "@react-navigation/native";
 import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from "@react-navigation/native";
+import LandingStackNavigator from "../../../navigation/LandingStackNavigator";
+import { logIn } from "../../../redux/slices/userSlice";
 
 const LoginForm = () => {
-
-  const navigation = useNavigation()
+  const dispatch = useDispatch();
+  const navigator = useNavigation();
+  console.log(navigator)
+  const loggedIn = useSelector((state) => state.user.loggedIn);
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -22,16 +27,23 @@ const LoginForm = () => {
 
   const handleLogin = async () => {
     try {
-      console.log("algo");
       await GoogleSignin.hasPlayServices();
-      console.log("algo 2");
       const userInfo = await GoogleSignin.signIn();
-      console.log("algo 3");
-      console.log({ userInfo, error: undefined });
+      const {givenName, familyName, email, photo} = userInfo.user;
+      dispatch(logIn({givenName, familyName, email, photo}));
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (loggedIn) {
+      console.log(loggedIn)
+      //ACÁ QUIERO QUE REDIRIJA DE ALGUNA MANERA PERO NI IDEA CÓMO ASDHKAS
+      
+    }
+  }
+  )
 
   return (
     <View style={styles.container}>

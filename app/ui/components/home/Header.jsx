@@ -5,16 +5,18 @@ import { colors } from '../../styles/RootColors';
 import Logo from '../../../assets/images/logo.png'
 
 const Header = () => {
-  return (
-    <View style={styles.container}>
-      <LinearGradient 
-        locations={[0, 1]}
-        colors={[colors.blue, `${colors.blue}00`]}
-        style={styles.linearGradient}>
-        <Image source={Logo} style={styles.logo}/>
-      </LinearGradient>
-    </View>
-  );
+
+
+    return (
+        <View style={styles.container}>
+            <LinearGradient 
+              locations={[0, 1]}
+              colors={[colors.blue, `${colors.blue}00`]}
+              style={styles.linearGradient}>
+              <Image source={Logo} style={styles.logo}/>
+            </LinearGradient>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

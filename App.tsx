@@ -11,9 +11,9 @@ function App(): React.JSX.Element {
   }, [])
 
   return (
-    // <Provider store={store}>
-      <RootNavigator />
-    // </Provider>
+     <Provider store={store}>
+        <RootNavigator />
+     </Provider>
   );
 }
 

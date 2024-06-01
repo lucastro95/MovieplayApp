@@ -21,6 +21,7 @@ const RootNavigator = () => {
                 name={Routes.TabBarStack}
                 component={TabBar}
             />
+
         </Stack.Navigator>
     </NavigationContainer>
   )

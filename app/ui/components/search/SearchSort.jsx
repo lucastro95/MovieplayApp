@@ -6,13 +6,15 @@ import OrderBy from "./OrderBy"
 
 
 const SearchSort = () => {
+
+
     return (
         <View style = {styles.filterTab}>
             <View style = {styles.iconContainer}>
                 <Icon name = {"sort"} style = {styles.icon} size = {40} color = {colors.white}/>
             </View>
-            <OrderBy text = {"Rate"} action={"orderByRate"} iconName = {"sort"} style = {styles.filterButton}></OrderBy>
-            <OrderBy text = {"Date"} action={"orderByDate"} iconName = {"sort"} style = {styles.filterButton}></OrderBy>
+            <OrderBy text = {"Rate"} style = {styles.filterButton}></OrderBy>
+            <OrderBy text = {"Date"} style = {styles.filterButton}></OrderBy>
 
         </View>
 
