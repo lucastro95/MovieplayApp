@@ -9,14 +9,11 @@ import {
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from "@react-navigation/native";
-import LandingStackNavigator from "../../../navigation/LandingStackNavigator";
-import { logIn } from "../../../redux/slices/userSlice";
+import { logIn } from "../../../redux/slices/UserSlice";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const navigator = useNavigation();
-  console.log(navigator)
-  const loggedIn = useSelector((state) => state.user.loggedIn);
+  const navigation = useNavigation();
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -31,19 +28,13 @@ const LoginForm = () => {
       const userInfo = await GoogleSignin.signIn();
       const {givenName, familyName, email, photo} = userInfo.user;
       dispatch(logIn({givenName, familyName, email, photo}));
+      if(userInfo) {
+        navigation.navigate('TabBarStack');
+      }
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    if (loggedIn) {
-      console.log(loggedIn)
-      //ACÁ QUIERO QUE REDIRIJA DE ALGUNA MANERA PERO NI IDEA CÓMO ASDHKAS
-      
-    }
-  }
-  )
 
   return (
     <View style={styles.container}>

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const userSlice = createSlice({
+export const UserSlice = createSlice({
     name: 'user',
     initialState: {
         givenName: null,
@@ -17,7 +17,6 @@ export const userSlice = createSlice({
             state.email = email
             state.photo = photo
             state.loggedIn = true
-            console.log(email)
         },
 
         logOut: (state) => {
@@ -31,5 +30,5 @@ export const userSlice = createSlice({
     }
 })
 
-export const { logIn, logOut } = userSlice.actions;
-export default userSlice.reducer;
+export const { logIn, logOut } = UserSlice.actions;
+export default UserSlice.reducer;

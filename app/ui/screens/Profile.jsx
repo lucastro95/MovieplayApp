@@ -3,14 +3,17 @@ import { colors } from "../styles/RootColors"
 import LogOut from "../components/profile/LogOut"
 import DeleteAccount from "../components/profile/DeleteAccount"
 import EditField from "../components/profile/EditField"
+import { useSelector } from "react-redux"
 
 const Profile = () => {
+
+  const user = useSelector((state) => state.user)
 
     return (
         <View style={styles.container}>
           <View style = {styles.imageSpace}>
             <View style = {styles.imageContainer}>
-              <Image style={styles.image} source={{ uri: 'https://blog.gleeden.com/es/wp-content/uploads/2013/12/shutterstock_61191451.jpg' }} /> 
+              <Image style={styles.image} source={{ uri: `${user.photo}` }} /> 
             </View>
             <EditField iconName={'plus-circle'} size = {30}/>
           </View>
@@ -19,7 +22,7 @@ const Profile = () => {
             <EditField iconName={'edit'} size = {Dimensions.get('window').height * 0.03}/>
           </View>
           <View style = {styles.infoBox2}>
-            <Text style = {styles.namesText} numberOfLines={1}>Nombre Apellido</Text>
+            <Text style = {styles.namesText} numberOfLines={1}>{user.givenName} {user.familyName}</Text>
             <EditField iconName={'edit'} size = {Dimensions.get('window').height * 0.03}/>
           </View>
           <View style = {styles.buttonContainer}>
