@@ -12,8 +12,10 @@ import { useNavigation } from "@react-navigation/native";
 import { logIn } from "../../../redux/slices/UserSlice";
 
 const LoginForm = () => {
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
+  const dispatch = useDispatch()
+  const navigation = useNavigation()
+  const loggedIn = useSelector((state) => state.user.loggedIn);
+
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -21,14 +23,13 @@ const LoginForm = () => {
     });
   }, []);
 
-
   const handleLogin = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       const {givenName, familyName, email, photo} = userInfo.user;
       dispatch(logIn({givenName, familyName, email, photo}));
-      if(userInfo) {
+      if(loggedIn) {
         navigation.navigate('TabBarStack');
       }
     } catch (error) {

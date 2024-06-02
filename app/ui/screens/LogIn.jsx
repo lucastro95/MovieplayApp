@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../styles/RootColors';
 import LoginForm from '../components/login/LoginForm';
 import I18n from '../../assets/strings/l18n';
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 const LogIn = () => {
 
-  const dispatch = useDispatch();
   const navigation = useNavigation()
+  const loggedIn = useSelector((state) => state.user.loggedIn);
+  
   return (
     <View style={styles.container}>
       <ImageBackground
