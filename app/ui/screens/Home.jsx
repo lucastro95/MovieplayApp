@@ -2,16 +2,13 @@ import { StyleSheet, View } from "react-native"
 import Header from "../components/home/Header"
 import { colors } from "../styles/RootColors"
 import MovieList from "../components/common/MovieList"
-import { SafeAreaView } from "react-native-safe-area-context"
-
-
 
 const Home = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Header/>
       <MovieList/>
-    </SafeAreaView>
+    </View>
   )
 }
 

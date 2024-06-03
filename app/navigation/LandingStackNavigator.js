@@ -15,9 +15,6 @@ const LandingStackNavigator = () => {
         <Stack.Screen 
           name="HomeScreen"
           component={Home}
-          options={{
-            statusBarHidden: true
-          }}
         />
       </Stack.Navigator>
     </>
