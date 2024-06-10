@@ -13,22 +13,22 @@ const Profile = () => {
 
     return (
         <View style={styles.container}>
+          <EditField iconName={'plus-circle'} size = {30}/>
           <View style = {styles.imageContainer}>
               <Image style={styles.image} source={{ uri: `${user.photo}` }} /> 
-              <EditField iconName={'plus-circle'} size = {Dimensions.get('window').height * 0.1}/>
           </View>
-          <View style = {styles.infoBox1} >
+          {/* <View style = {styles.infoBox1} >
             <Text style = {styles.usernameText} numberOfLines={1}>Tu nombre de usuario</Text>
             <EditField iconName={'edit'} size = {Dimensions.get('window').height * 0.03}/>
-          </View>
-          <View style = {styles.infoBox2}>
+          </View> */}
+          {/* <View style = {styles.infoBox2}>
             <Text style = {styles.namesText} numberOfLines={1}>{user.givenName} {user.familyName} </Text>
             <EditField iconName={'edit'} size = {Dimensions.get('window').height * 0.03}/>
-          </View>
-          <View style = {styles.buttonContainer}>
+          </View> */}
+          {/* <View style = {styles.buttonContainer}>
             <LogOut/>
             <DeleteAccount/>
-          </View>
+          </View> */}
         </View>
 
   )
@@ -94,10 +94,6 @@ const styles = StyleSheet.create({
           borderWidth: 10,
           borderRadius: 999,
           flex: 1
-        },
-
-        editImageButton: {
-          position: 'absolute',
         },
 
         buttonContainer: {

@@ -30,6 +30,7 @@ const LoginForm = () => {
       const {givenName, familyName, email, photo} = userInfo.user;
       dispatch(logIn({givenName, familyName, email, photo}));
       if(loggedIn) {
+        console.log(loggedIn);
         navigation.navigate('TabBarStack');
       }
     } catch (error) {

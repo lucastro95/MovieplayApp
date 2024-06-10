@@ -1,21 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../styles/RootColors';
 import LoginForm from '../components/login/LoginForm';
 import I18n from '../../assets/strings/l18n';
-import { useNavigation } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
-
+import moviesWS from '../../networking/api/endpoints/moviesWS';
+import axios from 'axios';
 
 const LogIn = () => {
+  const [bgImg, setBgImg] = useState([])
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const navigation = useNavigation()
-  const loggedIn = useSelector((state) => state.user.loggedIn);
-  
+  useEffect(() => {
+    const fetchImg = async () => {
+      try {
+        const response = await moviesWS.signIn();
+        const images = response.map(movie => movie.image);
+        setBgImg(images);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchImg();
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentImageIndex(prevIndex => (prevIndex + 1) % bgImg.length);
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+  }, [bgImg]);
+
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={{ uri: 'https://image.tmdb.org/t/p/original/fIUqk6Pjo3uf5RiOGT19KQ53ekq.jpg' }}
+        source={{ uri: bgImg[currentImageIndex] }}
         resizeMode="cover"
         style={styles.background}>
         <View style={styles.overlay} />
