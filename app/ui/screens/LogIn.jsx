@@ -32,6 +32,10 @@ const LogIn = () => {
     return () => clearInterval(intervalId);
   }, [bgImg]);
 
+  if (bgImg.length === 0) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
       <ImageBackground
