@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from "@react-navigation/native";
 import { logIn } from "../../../redux/slices/UserSlice";
+import loginWS from "../../../networking/api/endpoints/loginWS";
 
 const LoginForm = () => {
   const dispatch = useDispatch()
@@ -23,16 +24,22 @@ const LoginForm = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (loggedIn) {
+      console.log(loggedIn);
+      navigation.navigate('TabBarStack');
+    }
+  }, [loggedIn, navigation]);
+
   const handleLogin = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      const {givenName, familyName, email, photo} = userInfo.user;
-      dispatch(logIn({givenName, familyName, email, photo}));
-      if(loggedIn) {
-        console.log(loggedIn);
-        navigation.navigate('TabBarStack');
-      }
+      const {givenName, familyName, email, photo, id} = userInfo.user;
+      const response = await loginWS.postLogin({givenName, familyName, email, photo, id});
+      console.log(response);
+      const token = response.token
+      dispatch(logIn({givenName, familyName, email, photo, token}));
     } catch (error) {
       console.log(error);
     }
