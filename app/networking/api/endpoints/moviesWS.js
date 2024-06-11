@@ -5,7 +5,8 @@ export default moviesWS = {
         const response = await axios.get('movies/signIn');
         return response.data;
     },
-    getMovies: async function({language, }) {
-        const response = await axios.get(`/movies?language=${language}&search=inception&orderBy=release_date:asc,rating:desc`)
+    getMovies: async function({language, search = null, release = null, rating = null}) {
+        const response = await axios.get(`/movies?language=${language}`)
+        return response.data
     }
 }

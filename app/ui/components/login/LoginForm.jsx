@@ -26,7 +26,6 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (loggedIn) {
-      console.log(loggedIn);
       navigation.navigate('TabBarStack');
     }
   }, [loggedIn, navigation]);
@@ -36,10 +35,11 @@ const LoginForm = () => {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       const {givenName, familyName, email, photo, id} = userInfo.user;
-      const response = await loginWS.postLogin({givenName, familyName, email, photo, id});
-      console.log(response);
-      const token = response.token
-      dispatch(logIn({givenName, familyName, email, photo, token}));
+      // const response = await loginWS.postLogin({givenName, familyName, email, photo, id});
+      // console.log(response);
+      // const token = response.token
+      dispatch(logIn({givenName, familyName, email, photo}));
+      // dispatch(logIn({givenName, familyName, email, photo, token}));
     } catch (error) {
       console.log(error);
     }

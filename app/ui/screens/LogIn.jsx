@@ -4,7 +4,6 @@ import { colors } from '../styles/RootColors';
 import LoginForm from '../components/login/LoginForm';
 import I18n from '../../assets/strings/l18n';
 import moviesWS from '../../networking/api/endpoints/moviesWS';
-import axios from 'axios';
 
 const LogIn = () => {
   const [bgImg, setBgImg] = useState([])
