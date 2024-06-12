@@ -21,8 +21,9 @@ const styles = StyleSheet.create ({
         borderRadius: 50,
         flex: 1,
         flexDirection: 'row',
-        width: 100,
-
+        width: '100%',
+        minWidth: 150,
+        paddingHorizontal: 15
     },
 
     content: {

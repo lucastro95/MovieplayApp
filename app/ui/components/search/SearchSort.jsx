@@ -1,25 +1,19 @@
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, Text, View } from "react-native"
 import { colors } from "../../styles/RootColors"
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import OrderBy from "./OrderBy"
-
-
+import I18n from "../../../assets/strings/l18n"
 
 const SearchSort = () => {
 
 
     return (
         <View style = {styles.filterTab}>
-            <View style = {styles.iconContainer}>
-                <Icon name = {"sort"} style = {styles.icon} size = {40} color = {colors.white}/>
-            </View>
-            <OrderBy text = {"Rate"} style = {styles.filterButton}></OrderBy>
-            <OrderBy text = {"Date"} style = {styles.filterButton}></OrderBy>
-
+            <OrderBy text = {I18n.t('search.rate')} style = {styles.filterButton}></OrderBy>
+            <OrderBy text = {I18n.t('search.date')} style = {styles.filterButton}></OrderBy>
         </View>
 
     )
-
 }
 
 
@@ -37,13 +31,10 @@ const styles = StyleSheet.create({
 
     },
 
-    iconContainer: {
-        aspectRatio: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-
+    text: {
+        color: `${colors.white}`
     },
-    
+
     filterButton: {
         backgroundColor: `${colors.pink}`,
         color: `${colors.white}`,

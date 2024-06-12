@@ -15,7 +15,8 @@ export default {
     search: {
         input: "Title - Actor",
         date: "Date",
-        rate: "Rate"
+        rate: "Rate",
+        orderBy: "Ordenar por"
     },
     favourite: {
         title: "Your Favourites"

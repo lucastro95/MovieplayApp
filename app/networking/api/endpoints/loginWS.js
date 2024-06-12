@@ -5,12 +5,12 @@ export default loginWS = {
         const {givenName, familyName, email, photo, id} = userInfo;
 
         const requestBody = {
-            name: givenName,
-            lastname: familyName,
-            nickname: `${givenName[0].toUpperCase()}${familyName[0].toUpperCase()}`,
-            email: email,
-            googleId: id,
-            fotoPerfil: photo
+            "name": `${givenName}`,
+            "lastname": `${familyName}`,
+            "nickname": `${givenName[0].toUpperCase()}${familyName[0].toUpperCase()}`,
+            "email": `${email}`,
+            "googleId": `${id}`,
+            "fotoPerfil": `${photo}`
         };
 
         const response = await axios.post('/login', requestBody);

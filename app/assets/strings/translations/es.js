@@ -15,7 +15,8 @@ export default {
     search: {
         input: "Titulo - Actor",
         date: "Fecha",
-        rate: "Calificación"
+        rate: "Calificación",
+        orderBy: "Ordenar por"
     },
     favourite: {
         title: "Tus Favoritos"
