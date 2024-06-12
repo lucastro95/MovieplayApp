@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { logOut } from '../../../redux/slices/UserSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const LogOut = () => {
@@ -20,6 +21,7 @@ const LogOut = () => {
 
   const handleLogout = () => {
       dispatch(logOut());
+      AsyncStorage.removeItem('userToken')
   };
 
   return (

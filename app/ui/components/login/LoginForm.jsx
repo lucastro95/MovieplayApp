@@ -6,17 +6,19 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from "@react-navigation/native";
 import { logIn } from "../../../redux/slices/UserSlice";
 import loginWS from "../../../networking/api/endpoints/loginWS";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Loading from "../common/Loading";
 
 const LoginForm = () => {
   const dispatch = useDispatch()
   const navigation = useNavigation()
   const loggedIn = useSelector((state) => state.user.loggedIn);
-
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -32,13 +34,15 @@ const LoginForm = () => {
 
   const handleLogin = async () => {
     try {
+      setLoading(true)
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       const {givenName, familyName, email, photo, id} = userInfo.user;
       const response = await loginWS.postLogin({givenName, familyName, email, photo, id});
-      console.log(response);
       const token = response.token
       dispatch(logIn({givenName, familyName, email, photo, token}));
+      AsyncStorage.setItem('userToken', token)
+      setLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -46,6 +50,7 @@ const LoginForm = () => {
 
   return (
     <View style={styles.container}>
+      {loading && <Loading />}
       <View style={styles.form}>
         <Text style={styles.text}>{I18n.t('signIn.sign')}</Text>
         <TouchableHighlight
