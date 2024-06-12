@@ -9,17 +9,19 @@ export const UserSlice = createSlice({
         email: null,
         photo: null,
         token: null,
+        id: null,
         loggedIn: false
     },
     reducers: {
         logIn: (state, action) => {
-            const {givenName, familyName, email, photo, token} = action.payload;
+            const {givenName, familyName, email, photo, token, id} = action.payload;
             state.givenName = givenName
             state.familyName = familyName
             state.nickName = `${givenName[0].toUpperCase()}${familyName[0].toUpperCase()}`
             state.email = email
             state.photo = photo
             state.token = token
+            state.id = id
             state.loggedIn = true
         },
 
@@ -30,8 +32,13 @@ export const UserSlice = createSlice({
             state.email = null
             state.photo = null
             state.token = null
+            state.id = null
             state.loggedIn = false
         },
+
+        editField: (state, action) => {
+            
+        }
     }
 })
 

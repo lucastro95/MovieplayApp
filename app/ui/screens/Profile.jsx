@@ -13,12 +13,11 @@ const Profile = () => {
 
     return (
         <View style={styles.container}>
-          {/* <EditField iconName={'plus-circle'} size = {30}/> */}
           <View style = {styles.imageContainer}>
               <Image style={styles.image} source={{ uri: `${user.photo}` }} /> 
           </View>
           <View style = {styles.infoBox1} >
-            <Text style = {styles.usernameText} numberOfLines={1}>Tu nombre de usuario</Text>
+            <Text style = {styles.usernameText} numberOfLines={1}>{user.nickName}</Text>
             <EditField iconName={'edit'} size = {Dimensions.get('window').height * 0.03}/>
           </View>
           <View style = {styles.infoBox2}>

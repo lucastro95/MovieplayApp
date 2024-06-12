@@ -40,7 +40,7 @@ const LoginForm = () => {
       const {givenName, familyName, email, photo, id} = userInfo.user;
       const response = await loginWS.postLogin({givenName, familyName, email, photo, id});
       const token = response.token
-      dispatch(logIn({givenName, familyName, email, photo, token}));
+      dispatch(logIn({givenName, familyName, email, photo, token, id}));
       AsyncStorage.setItem('userToken', token)
       setLoading(false)
     } catch (error) {
