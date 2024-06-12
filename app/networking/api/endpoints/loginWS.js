@@ -16,6 +16,14 @@ export default loginWS = {
         const response = await axios.post('/login', requestBody);
 
         return response.data;
-    }
+    },
+    postToken: async function(token) {
+        const requestBody = {
+            "token": `${token}`
+        }
 
+        const response = await axios.post('login/token', requestBody)
+
+        return response.data
+    }
 }
