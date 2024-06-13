@@ -12,6 +12,7 @@ import EditField from "../components/profile/EditField"
 import usersWS from "../../networking/api/endpoints/usersWS"
 
 const Profile = () => {
+
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [fieldToEdit, setFieldToEdit] = useState(null);
   const user = useSelector((state) => state.user);
@@ -54,16 +55,21 @@ const closeImageGallery = () => {
     setPendingUpdate(true);
   };
 
+  const getImageSource = () => {
+    return user.photo ? { uri: user.photo } : placeholder;
+};
+
   useEffect(() => {
     if (pendingUpdate) {
       updateUser();
     }
   }, [user, pendingUpdate]);
 
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style = {styles.imageContainer} onPress={openImageGallery}>
-        <Image style={styles.image} source={user.photo ? { uri: `${user.photo}` } : placeholder} /> 
+        <Image style={styles.image} source={getImageSource()} />
       </TouchableOpacity>
       <View style={styles.infoBox1}>
         <Text style={styles.usernameText} numberOfLines={1}>{user.nickName}</Text>

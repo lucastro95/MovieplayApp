@@ -19,8 +19,6 @@ export default usersWS = {
     editUser: async function(user) {
         const {givenName, familyName, nickName, email, photo, id} = user
 
-        console.log(user);
-
         const requestBody = {
             "id": `${id}`,
             "name": `${givenName}`,
