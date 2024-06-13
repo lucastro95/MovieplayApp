@@ -50,10 +50,14 @@ export const UserSlice = createSlice({
         editNickName: (state, action) => {
             const nickname = action.payload;
             state.nickName = nickname
-            console.log(state.nickName);
         },
+
+        editImage: (state, action) => {
+            const photo = action.payload;
+            state.photo = photo
+        }
     }
 })
 
-export const { logIn, logOut, editName, editNickName } = UserSlice.actions;
+export const { logIn, logOut, editName, editNickName, editImage } = UserSlice.actions;
 export default UserSlice.reducer;
