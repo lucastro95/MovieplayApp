@@ -31,7 +31,9 @@ export default {
         edit: "Editar Nombre",
         name: "Nombre",
         lastName: "Apellido",
-        nickname: "Nickname"
+        nickname: "Nickname",
+        changeImageYes: "Seleccionar",
+        changeImageNo: "Cancelar"
     },
     error: {
         oops: "Ups, algo salió mal",

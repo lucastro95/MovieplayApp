@@ -1,9 +1,10 @@
-import { Text, StyleSheet, View, Image, Dimensions } from "react-native"
+import { Text, StyleSheet, View, Image, Dimensions, TouchableOpacity, Modal } from "react-native"
 import { colors } from "../styles/RootColors"
 import LogOut from "../components/profile/LogOut"
 import DeleteAccount from "../components/profile/DeleteAccount"
 import { useDispatch, useSelector } from "react-redux"
 import placeholder from "../../assets/images/placeholder_user.png"
+import ImageGallery from "../components/profile/ImageGallery"
 import { useEffect, useState } from "react"
 import EditPopup from "../components/profile/EditPopup"
 import { editName, editNickName } from "../../redux/slices/UserSlice"
@@ -15,8 +16,17 @@ const Profile = () => {
   const [fieldToEdit, setFieldToEdit] = useState(null);
   const user = useSelector((state) => state.user);
   const [pendingUpdate, setPendingUpdate] = useState(false);
+  const [isImageGalleryVisible, setImageGalleryVisible] = useState(false);
 
   const dispatch = useDispatch();
+
+  const openImageGallery = () => {
+    setImageGalleryVisible(true);
+};
+
+const closeImageGallery = () => {
+    setImageGalleryVisible(false);
+};
 
   const handleEditField = () => {
     setPopupVisible(true);
@@ -68,6 +78,15 @@ const Profile = () => {
         <DeleteAccount />
       </View>
       <EditPopup visible={isPopupVisible} onClose={handleClosePopup} onSave={handleSave} fieldToEdit={fieldToEdit} />
+      <Modal 
+              animationType="slide"
+              transparent={true}
+              visible={isImageGalleryVisible}
+              onRequestClose={closeImageGallery}
+          >
+            <ImageGallery onClose = {closeImageGallery}/>
+
+          </Modal>
     </View>
   );
 }
