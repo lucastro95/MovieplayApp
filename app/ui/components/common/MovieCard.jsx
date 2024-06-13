@@ -7,9 +7,7 @@ import placeholder from "../../../assets/images/placeholder_movie.png"
 const COLUMN_WIDTH = width / 2;
 
 const MovieCard = ({title, imageUri}) => {
-  if(title === '"Vegeta" (Shrek)') {
-    console.log(imageUri);
-  }
+
   return (
     <View style = {styles.card}>
       {imageUri === "https://image.tmdb.org/t/p/originalnull" ?

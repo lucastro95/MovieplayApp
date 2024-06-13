@@ -1,21 +1,33 @@
-import { Text, StyleSheet, View, Image, Dimensions } from "react-native"
+import { Text, StyleSheet, View, Image, Dimensions, TouchableOpacity, Modal } from "react-native"
 import { colors } from "../styles/RootColors"
 import LogOut from "../components/profile/LogOut"
 import DeleteAccount from "../components/profile/DeleteAccount"
 import EditField from "../components/profile/EditField"
 import { useSelector } from "react-redux"
 import placeholder from "../../assets/images/placeholder_user.png"
+import { useState } from "react"
+import ImageGallery from "../components/profile/ImageGallery"
 
 const Profile = () => {
 
-  const user = useSelector((state) => state.user);
+    const user = useSelector((state) => state.user);
 
+    const [isImageGalleryVisible, setImageGalleryVisible] = useState(false);
+
+
+    const openImageGallery = () => {
+      setImageGalleryVisible(true);
+  };
+
+  const closeImageGallery = () => {
+      setImageGalleryVisible(false);
+  };
 
     return (
         <View style={styles.container}>
-          <View style = {styles.imageContainer}>
+          <TouchableOpacity style = {styles.imageContainer} onPress={openImageGallery}>
               <Image style={styles.image} source={user.photo ? { uri: `${user.photo}` } : placeholder} /> 
-          </View>
+          </TouchableOpacity>
           <View style = {styles.infoBox1} >
             <Text style = {styles.usernameText} numberOfLines={1}>{user.nickName}</Text>
             <EditField iconName={'edit'} size = {Dimensions.get('window').height * 0.03}/>
@@ -28,6 +40,15 @@ const Profile = () => {
             <LogOut/>
             <DeleteAccount/>
           </View>
+          <Modal 
+              animationType="slide"
+              transparent={true}
+              visible={isImageGalleryVisible}
+              onRequestClose={closeImageGallery}
+          >
+            <ImageGallery onClose = {closeImageGallery}/>
+
+          </Modal>
         </View>
 
   )

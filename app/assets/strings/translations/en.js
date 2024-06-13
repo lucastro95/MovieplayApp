@@ -27,7 +27,9 @@ export default {
         alertTitle: "Account Deletion",
         alertDescription: "Do you wanna delete your account?",
         alertYes: "Confirm",
-        alertNo: "Cancel"
+        alertNo: "Cancel",
+        changeImageYes: "Choose",
+        changeImageNo: "Close"
     },
     error: {
         oops: "Oops, something went wrong",
