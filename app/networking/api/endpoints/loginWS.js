@@ -22,7 +22,13 @@ export default loginWS = {
             "token": `${token}`
         }
 
-        const response = await axios.post('login/token', requestBody)
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        };
+
+        const response = await axios.post('/login/token', requestBody, config);
 
         return response.data
     }
