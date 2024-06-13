@@ -2,12 +2,12 @@ import axios from '../api'
 
 export default loginWS = {
     postLogin: async function(userInfo) {
-        const {givenName, familyName, email, photo, id} = userInfo;
+        const {givenName, familyName, nickName, email, photo, id} = userInfo;
 
         const requestBody = {
             "name": `${givenName}`,
             "lastname": `${familyName}`,
-            "nickname": `${givenName[0].toUpperCase()}${familyName[0].toUpperCase()}`,
+            "nickname": `${nickName ? nickName : givenName[0].toUpperCase()}${familyName[0].toUpperCase()}`,
             "email": `${email}`,
             "googleId": `${id}`,
             "fotoPerfil": `${photo}`

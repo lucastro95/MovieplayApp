@@ -1,12 +1,13 @@
 import React from 'react'
 import RoundButtonIcon from '../../components/common/RoundButtonIcon'
-import { View, StyleSheet, Dimensions, Text } from 'react-native';
+import { View } from 'react-native';
 
 
-const EditField = ( {iconName, size }) => {
+const EditField = ( {iconName, size, handleEditField, name, setFieldToEdit }) => {
     const handleFieldChange = () => {
-        console.log('Change Profile');
-      };
+        handleEditField()
+        setFieldToEdit(name)
+    };
 
     return (
         <View>

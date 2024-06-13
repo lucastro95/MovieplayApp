@@ -14,10 +14,10 @@ export const UserSlice = createSlice({
     },
     reducers: {
         logIn: (state, action) => {
-            const {givenName, familyName, email, photo, token, id} = action.payload;
+            const {givenName, familyName, nickName, email, photo, token, id} = action.payload;
             state.givenName = givenName
             state.familyName = familyName
-            state.nickName = `${givenName[0].toUpperCase()}${familyName[0].toUpperCase()}`
+            state.nickName = nickName || `${givenName[0].toUpperCase()}${familyName[0].toUpperCase()}`;
             state.email = email
             state.photo = photo
             state.token = token
@@ -36,11 +36,24 @@ export const UserSlice = createSlice({
             state.loggedIn = false
         },
 
-        editField: (state, action) => {
-            
-        }
+        editName: (state, action) => {
+            const { givenName, familyName } = action.payload;
+            console.log(givenName, familyName);
+            if (givenName !== undefined && givenName !== null && givenName !== '') {
+                state.givenName = givenName;
+            }
+            if (familyName !== undefined && familyName !== null && familyName !== '') {
+                state.familyName = familyName;
+            }
+        },
+
+        editNickName: (state, action) => {
+            const nickname = action.payload;
+            state.nickName = nickname
+            console.log(state.nickName);
+        },
     }
 })
 
-export const { logIn, logOut } = UserSlice.actions;
+export const { logIn, logOut, editName, editNickName } = UserSlice.actions;
 export default UserSlice.reducer;

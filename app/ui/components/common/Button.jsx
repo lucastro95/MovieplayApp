@@ -13,6 +13,7 @@ const Button = ({ text, action }) => {
 const styles = StyleSheet.create ({
     button: {
         padding: 15,
+        paddingHorizontal: 30,
         backgroundColor: colors.pink,
         borderRadius: 50,
         margin: '5%',

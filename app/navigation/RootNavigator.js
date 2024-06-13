@@ -19,14 +19,11 @@ const RootNavigator = () => {
     const getToken = async () => {
         try {
             const userToken = await AsyncStorage.getItem('userToken');
-            console.log(userToken);
             if (userToken !== null) {
                 const response = await loginWS.postToken(userToken);
                 const token = response.token;
-                console.log(token);
-                const { name: givenName, lastname: familyName, email, photo, id } = response.user;
-                console.log(givenName, familyName, email, photo, token);
-                dispatch(logIn({givenName, familyName, email, photo, token, id}));
+                const { name: givenName, lastname: familyName, nickname: nickName, email, photo, id } = response.user;
+                dispatch(logIn({givenName, familyName, nickName, email, photo, token, id}));
                 await AsyncStorage.setItem('userToken', token)
                 setInitialRoute(Routes.TabBarStack);
             }

@@ -25,9 +25,13 @@ export default {
         logOut: "Cerrar Sesión",
         delete: "Eliminar Cuenta",
         alertTitle: "Eliminar Cuenta",
-        alertDescription: "¿Desea eliminar su cuenta"?
+        alertDescription: "¿Desea eliminar su cuenta?",
         alertYes: "Confirmar",
-        alertNo: "Cancelar"
+        alertNo: "Cancelar",
+        edit: "Editar Nombre",
+        name: "Nombre",
+        lastName: "Apellido",
+        nickname: "Nickname"
     },
     error: {
         oops: "Ups, algo salió mal",
@@ -36,4 +40,5 @@ export default {
     },
     send: "Enviar",
     sendOK: "Enviado!",
+    close: "Cerrar"
 }

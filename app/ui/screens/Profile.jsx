@@ -2,35 +2,74 @@ import { Text, StyleSheet, View, Image, Dimensions } from "react-native"
 import { colors } from "../styles/RootColors"
 import LogOut from "../components/profile/LogOut"
 import DeleteAccount from "../components/profile/DeleteAccount"
-import EditField from "../components/profile/EditField"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import placeholder from "../../assets/images/placeholder_user.png"
+import { useEffect, useState } from "react"
+import EditPopup from "../components/profile/EditPopup"
+import { editName, editNickName } from "../../redux/slices/UserSlice"
+import EditField from "../components/profile/EditField"
+import usersWS from "../../networking/api/endpoints/usersWS"
 
 const Profile = () => {
-
+  const [isPopupVisible, setPopupVisible] = useState(false);
+  const [fieldToEdit, setFieldToEdit] = useState(null);
   const user = useSelector((state) => state.user);
+  const [pendingUpdate, setPendingUpdate] = useState(false);
 
+  const dispatch = useDispatch();
 
-    return (
-        <View style={styles.container}>
-          <View style = {styles.imageContainer}>
-              <Image style={styles.image} source={user.photo ? { uri: `${user.photo}` } : placeholder} /> 
-          </View>
-          <View style = {styles.infoBox1} >
-            <Text style = {styles.usernameText} numberOfLines={1}>{user.nickName}</Text>
-            <EditField iconName={'edit'} size = {Dimensions.get('window').height * 0.03}/>
-          </View>
-          <View style = {styles.infoBox2}>
-            <Text style = {styles.namesText} numberOfLines={1}>{user.givenName} {user.familyName} </Text>
-            <EditField iconName={'edit'} size = {Dimensions.get('window').height * 0.03}/>
-          </View>
-          <View style = {styles.buttonContainer}>
-            <LogOut/>
-            <DeleteAccount/>
-          </View>
-        </View>
+  const handleEditField = () => {
+    setPopupVisible(true);
+  };
 
-  )
+  const handleClosePopup = () => {
+    setPopupVisible(false);
+  };
+
+  const updateUser = async () => {
+    try {
+      const response = await usersWS.editUser(user);
+      setPendingUpdate(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSave = (givenName, familyName, nickName) => {
+    if (fieldToEdit === 'name') {
+      dispatch(editName({ givenName, familyName }));
+    } else if (fieldToEdit === 'nickname') {
+      dispatch(editNickName(nickName));
+    }
+    setPendingUpdate(true);
+  };
+
+  useEffect(() => {
+    if (pendingUpdate) {
+      updateUser();
+    }
+  }, [user, pendingUpdate]);
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.imageContainer}>
+        <Image style={styles.image} source={user.photo ? { uri: `${user.photo}` } : placeholder} />
+      </View>
+      <View style={styles.infoBox1}>
+        <Text style={styles.usernameText} numberOfLines={1}>{user.nickName}</Text>
+        <EditField iconName={'edit'} size={Dimensions.get('window').height * 0.03} handleEditField={handleEditField} name="nickname" setFieldToEdit={setFieldToEdit} />
+      </View>
+      <View style={styles.infoBox2}>
+        <Text style={styles.namesText} numberOfLines={1}>{user.givenName} {user.familyName} </Text>
+        <EditField iconName={'edit'} size={Dimensions.get('window').height * 0.03} handleEditField={handleEditField} name="name" setFieldToEdit={setFieldToEdit} />
+      </View>
+      <View style={styles.buttonContainer}>
+        <LogOut />
+        <DeleteAccount />
+      </View>
+      <EditPopup visible={isPopupVisible} onClose={handleClosePopup} onSave={handleSave} fieldToEdit={fieldToEdit} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

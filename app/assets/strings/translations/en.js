@@ -27,7 +27,11 @@ export default {
         alertTitle: "Account Deletion",
         alertDescription: "Do you wanna delete your account?",
         alertYes: "Confirm",
-        alertNo: "Cancel"
+        alertNo: "Cancel",
+        edit: "Edit Name",
+        name: "Name",
+        lastName: "Apellido",
+        nickname: "Nickname"
     },
     error: {
         oops: "Oops, something went wrong",
@@ -36,4 +40,5 @@ export default {
     },
     send: "Send",
     sendOK: "Sent correctly!",
+    close: "Close"
 }

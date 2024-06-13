@@ -34,15 +34,26 @@ const LoginForm = () => {
 
   const handleLogin = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      const {givenName, familyName, email, photo, id} = userInfo.user;
-      const response = await loginWS.postLogin({givenName, familyName, email, photo, id});
+      const { givenName, familyName, email, photo: googlePhoto, id } = userInfo.user;
+
+      // Hacer la solicitud de login
+      const response = await loginWS.postLogin({ givenName, familyName, email, photo: googlePhoto, id });
       const token = response.token
-      dispatch(logIn({givenName, familyName, email, photo, token, id}));
-      AsyncStorage.setItem('userToken', token)
-      setLoading(false)
+
+      // Extraer los valores del response
+      const { name, lastname, nickname, photo } = response.user;
+      console.log(name, lastname, nickname, photo, token);
+
+      // Despachar la acción con los valores del response
+      dispatch(logIn({ givenName: name, familyName: lastname, nickName: nickname, email, photo, token, id }));
+
+      // Almacenar el token en AsyncStorage
+      await AsyncStorage.setItem('userToken', token);
+
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -96,4 +107,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default LoginForm
+export default LoginForm
