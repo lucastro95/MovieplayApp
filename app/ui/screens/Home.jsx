@@ -11,21 +11,28 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const language = I18n.locale;
-  let page = 1;
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     fetchMovies();
   }, []); 
 
-  const fetchMovies = async () => {
+  const fetchMovies = async (resetPage = false) => {
     try {
       setLoading(true);
-      const response = await moviesWS.getMovies({ language, page });
-      setMovies(response);
+      const newPage = resetPage ? 1 : page;
+      const response = await moviesWS.getMovies({ language, page: newPage });
+      setMovies(prevMovies => resetPage ? response : [...prevMovies, ...response]);
+      setPage(newPage + 1);
       setLoading(false);
     } catch (error) {
       console.log(error);
-      setLoading(false);
+    }
+  };
+
+  const handleEndReached = () => {
+    if (!loading) {
+      fetchMovies();
     }
   };
 
@@ -33,7 +40,7 @@ const Home = () => {
     <View style={styles.container}>
       {loading && <Loading />}
       <Header />
-      <MovieList movies={movies} />
+      <MovieList movies={movies} onEndReached={handleEndReached} />
     </View>
   );
 }

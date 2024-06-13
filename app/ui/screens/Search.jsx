@@ -3,36 +3,40 @@ import { colors } from "../styles/RootColors"
 import SearchBar from "../components/search/SearchBar"
 import SearchSort from "../components/search/SearchSort"
 import MovieList from "../components/common/MovieList"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import moviesWS from "../../networking/api/endpoints/moviesWS"
 import I18n from "../../assets/strings/l18n"
 import Loading from "../components/common/Loading"
 
 const Search = () => {
   const [input, setInput] = useState('')
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [page, setPage] = useState(1)
+  const [rating, setRating] = useState(null)
+  const [release, setRelease] = useState(null)
   const language = I18n.locale
-  const flatListRef = useRef(null);
 
-  const fetchMovies = async (resetPage = false) => {
+  useEffect(() => {
+    if(rating || release) {
+      fetchMovies()
+    }
+  }, [rating, release])
+  
+
+  const fetchMovies = async () => {
     try {
       Keyboard.dismiss();
       setLoading(true);
-      const newPage = resetPage ? 1 : page;
-      const response = await moviesWS.getMovies({ language, input, page: newPage });
-      setMovies(prevMovies => resetPage ? response : [...prevMovies, ...response]);
-      setPage(newPage + 1);
+      let response
+      if(!release && !rating) {
+        response = await moviesWS.getMovies({ language, input });
+        } else {
+        response = await moviesWS.getMovies({ language, input, release, rating });
+      }
+      setMovies(response);
       setLoading(false);
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  const handleEndReached = () => {
-    if (!loading) {
-      fetchMovies();
     }
   };
   
@@ -40,9 +44,19 @@ const Search = () => {
     <View style={styles.container}>
       {loading && <Loading />}
       <SearchBar input={input} setInput={setInput} fetchMovies={fetchMovies}/>
-      <SearchSort />
-      <Text style = {styles.text}>Ordered by</Text>
-      <MovieList movies={movies} onEndReached={handleEndReached} />
+      
+      {movies === null ? null : 
+      movies.length === 0 ? ( 
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{I18n.t('search.error')}</Text>
+        </View>
+      ) : (
+        <>
+          <SearchSort rating={rating} setRating={setRating} release={release} setRelease={setRelease} fetchMovies={fetchMovies}/>
+          <Text style = {styles.text}>Ordered by</Text>
+          <MovieList movies={movies} onEndReached={() => {}} />
+        </>
+      )}
     </View>
   )
 }
@@ -58,6 +72,19 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
     marginBottom: 20,
+  },
+
+  errorContainer: {
+    width: '100%',
+    height: '50%',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  errorText: {
+    color: `${colors.white}`,
+    fontSize: 20
   }
 })
 

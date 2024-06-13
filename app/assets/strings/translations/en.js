@@ -16,7 +16,7 @@ export default {
         input: "Title - Actor",
         date: "Date",
         rate: "Rate",
-        orderBy: "Ordenar por"
+        error: "No results found..."
     },
     favourite: {
         title: "Your Favourites"

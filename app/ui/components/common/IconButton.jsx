@@ -8,7 +8,7 @@ const IconButton = ({ text, action, iconName }) => {
     return (
         <TouchableHighlight style={styles.button} onPress={action}>
           <View style = {styles.content}>
-            <Icon name={iconName} style={styles.icon} size ={30}/>
+            <Icon name={iconName} style={styles.icon} size={30}/>
             <Text style={styles.text}>{text}</Text>
           </View>
         </TouchableHighlight>

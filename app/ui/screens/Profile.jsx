@@ -4,7 +4,7 @@ import LogOut from "../components/profile/LogOut"
 import DeleteAccount from "../components/profile/DeleteAccount"
 import EditField from "../components/profile/EditField"
 import { useSelector } from "react-redux"
-
+import placeholder from "../../assets/images/placeholder_user.png"
 
 const Profile = () => {
 
@@ -14,7 +14,7 @@ const Profile = () => {
     return (
         <View style={styles.container}>
           <View style = {styles.imageContainer}>
-              <Image style={styles.image} source={{ uri: `${user.photo}` }} /> 
+              <Image style={styles.image} source={user.photo ? { uri: `${user.photo}` } : placeholder} /> 
           </View>
           <View style = {styles.infoBox1} >
             <Text style = {styles.usernameText} numberOfLines={1}>{user.nickName}</Text>
