@@ -62,9 +62,9 @@ const closeImageGallery = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image style={styles.image} source={user.photo ? { uri: `${user.photo}` } : placeholder} />
-      </View>
+      <TouchableOpacity style = {styles.imageContainer} onPress={openImageGallery}>
+        <Image style={styles.image} source={user.photo ? { uri: `${user.photo}` } : placeholder} /> 
+      </TouchableOpacity>
       <View style={styles.infoBox1}>
         <Text style={styles.usernameText} numberOfLines={1}>{user.nickName}</Text>
         <EditField iconName={'edit'} size={Dimensions.get('window').height * 0.03} handleEditField={handleEditField} name="nickname" setFieldToEdit={setFieldToEdit} />
