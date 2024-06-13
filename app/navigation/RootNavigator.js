@@ -21,7 +21,6 @@ const RootNavigator = () => {
             const userToken = await AsyncStorage.getItem('userToken');
             if (userToken !== null) {
                 const response = await loginWS.postToken(userToken);
-
                 const token = response.token;
                 const { name: givenName, lastname: familyName, email, photo, id } = response.user;
                 console.log(givenName, familyName, email, photo, token);

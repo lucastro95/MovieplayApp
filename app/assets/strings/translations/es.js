@@ -23,7 +23,11 @@ export default {
     },
     profile: {
         logOut: "Cerrar Sesión",
-        delete: "Eliminar Cuenta"
+        delete: "Eliminar Cuenta",
+        alertTitle: "Eliminar Cuenta",
+        alertDescription: "¿Desea eliminar su cuenta"?
+        alertYes: "Confirmar",
+        alertNo: "Cancelar"
     },
     error: {
         oops: "Ups, algo salió mal",

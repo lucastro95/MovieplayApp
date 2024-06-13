@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
 
         imageContainer: {
           marginTop: 70,
-          width: '65%',
+          width: '60%',
           aspectRatio: 1,
           borderRadius: 999,
 
@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
           borderColor: colors.pink,
           borderWidth: 10,
           borderRadius: 999,
+          aspectRatio: 1,
           flex: 1
         },
 

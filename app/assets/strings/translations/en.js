@@ -23,7 +23,11 @@ export default {
     },
     profile: {
         logOut: "Log Out",
-        delete: "Delete Account"
+        delete: "Delete Account",
+        alertTitle: "Account Deletion",
+        alertDescription: "Do you wanna delete your account?",
+        alertYes: "Confirm",
+        alertNo: "Cancel"
     },
     error: {
         oops: "Oops, something went wrong",
