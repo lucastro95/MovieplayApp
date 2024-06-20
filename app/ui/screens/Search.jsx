@@ -1,47 +1,64 @@
-import { StyleSheet, View, Text, Keyboard } from "react-native"
-import { colors } from "../styles/RootColors"
-import SearchBar from "../components/search/SearchBar"
-import SearchSort from "../components/search/SearchSort"
-import MovieList from "../components/common/MovieList"
-import { useEffect, useState } from "react"
-import moviesWS from "../../networking/api/endpoints/moviesWS"
-import I18n from "../../assets/strings/l18n"
-import Loading from "../components/common/Loading"
+import { StyleSheet, View, Text, Keyboard } from "react-native";
+import { colors } from "../styles/RootColors";
+import SearchBar from "../components/search/SearchBar";
+import SearchSort from "../components/search/SearchSort";
+import MovieList from "../components/common/MovieList";
+import { useEffect, useState } from "react";
+import moviesWS from "../../networking/api/endpoints/moviesWS";
+import I18n from "../../assets/strings/l18n";
+import Loading from "../components/common/Loading";
+import ErrorModal from "../components/common/ErrorModal";
 
 const Search = () => {
-  const [input, setInput] = useState('')
-  const [movies, setMovies] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [rating, setRating] = useState(null)
-  const [release, setRelease] = useState(null)
-  const language = I18n.locale
+  const [input, setInput] = useState('');
+  const [movies, setMovies] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [rating, setRating] = useState(null);
+  const [release, setRelease] = useState(null);
+  const [errorVisible, setErrorVisible] = useState(false);
+  const [noConnection, setNoConnection] = useState(false);
+  const language = I18n.locale;
 
   useEffect(() => {
-    if(rating || release) {
-      fetchMovies()
-    }
-  }, [rating, release])
-  
+      fetchMovies();
+  }, [rating, release]);
 
   const fetchMovies = async () => {
     try {
       Keyboard.dismiss();
       setLoading(true);
-      let response
-      if(!release && !rating) {
+      let response;
+      if (!release && !rating) {
         response = await moviesWS.getMovies({ language, input });
-        } else {
+      } else {
         response = await moviesWS.getMovies({ language, input, release, rating });
       }
       setMovies(response);
       setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
+      setErrorVisible(true);
+      if (error.message.includes("Network Error")) {
+        setNoConnection(true);
+      } else {
+        setNoConnection(false);
+      }
     }
   };
-  
+
+  const handleCloseErrorModal = () => {
+    setErrorVisible(false);
+    setNoConnection(false);
+  };
+
   return (
     <View style={styles.container}>
+      <ErrorModal 
+        visible={errorVisible} 
+        noconnection={noConnection} 
+        onClose={handleCloseErrorModal}
+      />
       {loading && <Loading />}
       <SearchBar input={input} setInput={setInput} fetchMovies={fetchMovies}/>
       
@@ -53,13 +70,12 @@ const Search = () => {
       ) : (
         <>
           <SearchSort rating={rating} setRating={setRating} release={release} setRelease={setRelease} fetchMovies={fetchMovies}/>
-          <Text style = {styles.text}>Ordered by</Text>
           <MovieList movies={movies} onEndReached={() => {}} />
         </>
       )}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -86,6 +102,6 @@ const styles = StyleSheet.create({
     color: `${colors.white}`,
     fontSize: 20
   }
-})
+});
 
-export default Search
+export default Search;

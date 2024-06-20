@@ -36,7 +36,7 @@ export default {
         changeImageNo: "Close"
     },
     error: {
-        oops: "Oops, something went wrong",
+        oops: "Oops, something went wrong...",
         connection: "There's no internet connection",
         tryAgain: "Try Again" 
     },

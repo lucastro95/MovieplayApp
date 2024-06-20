@@ -36,7 +36,7 @@ export default {
         changeImageNo: "Cancelar"
     },
     error: {
-        oops: "Ups, algo salió mal",
+        oops: "Ups, algo salió mal...",
         connection: "No hay conexión a Internet",
         tryAgain: "Volver a intentar" 
     },

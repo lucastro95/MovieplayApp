@@ -7,7 +7,7 @@ import I18n from "../../../assets/strings/l18n";
 const SearchBar = ({ input, setInput, fetchMovies }) => {
 
     const handleInput = (text) => {
-        setInput(text.toLowerCase());
+        setInput(text);
     };
 
     return (

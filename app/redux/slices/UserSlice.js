@@ -49,7 +49,9 @@ export const UserSlice = createSlice({
 
         editNickName: (state, action) => {
             const nickname = action.payload;
-            state.nickName = nickname
+            if (nickname !== undefined && nickname !== null && nickname !== '') {
+                state.nickName = nickname;
+            }
         },
 
         editImage: (state, action) => {

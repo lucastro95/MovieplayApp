@@ -19,7 +19,7 @@ const OrderBy = ({ text, order, setOrder, fetchMovies }) => {
         } else if (order === 'asc'){
             setOrder('desc');
         } else if (order === 'desc') {
-            setOrder('asc');
+            setOrder(null);
         }
     };
 
