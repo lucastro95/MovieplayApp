@@ -10,7 +10,8 @@ export default {
         info: "Más información",
         genres: "Géneros",
         director: "Director",
-        actors: "Actores"
+        actors: "Actores",
+        share: "¡Compartí tu contenido favorito de MoviePlay!"
     },
     search: {
         input: "Titulo - Actor",

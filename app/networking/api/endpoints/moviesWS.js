@@ -1,21 +1,29 @@
-import axios from '../api'
+import axios from '../api';
 
-export default moviesWS = {
+const moviesWS = {
     signIn: async function() {
         const response = await axios.get('movies/signIn');
         return response.data;
     },
-    getMovies: async function({language, input = null, release = null, rating = null, page = 1}) {
+    getMovies: async function({ language, input = null, release = null, rating = null, page = 1, genre = null }) {
         let response;
+
         if (input === null) {
-            response = await axios.get(`movies?language=${language}&page=${page}`);
+            if (genre === null) {
+                response = await axios.get(`movies?language=${language}&page=${page}`);
+            } else {
+                response = await axios.get(`movies?language=${language}&page=${page}&genre=${genre}`);
+            }
         } else {
-            if(release === null && rating === null) {
+            if (release === null && rating === null) {
                 response = await axios.get(`movies?language=${language}&search=${input}&page=${page}`);
             } else {
                 response = await axios.get(`movies?language=${language}&search=${input}&orderBy=release_date:${release},vote_average:${rating}&page=${page}`);
             }
         }
+
         return response.data;
     }
 }
+
+export default moviesWS;

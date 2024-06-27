@@ -16,7 +16,7 @@ const styles = StyleSheet.create ({
         paddingHorizontal: 30,
         backgroundColor: colors.pink,
         borderRadius: 50,
-        margin: '5%',
+        marginVertical: 10
     },
 
     text: {
