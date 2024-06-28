@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, StyleSheet, View, Dimensions, Share } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Entypo';
@@ -10,17 +10,24 @@ import I18n from '../../../assets/strings/l18n';
 const { height } = Dimensions.get('window');
 
 const Header = () => {
-    const navigation = useNavigation()
+    const navigation = useNavigation();
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    const images = [
+        { uri: 'https://image.tmdb.org/t/p/original/xY0oQFV7lj1uCdJmSvauiaF9ZOR.jpg' },
+        { uri: 'https://image.tmdb.org/t/p/original/3jAmIiF931QuBAZ93OOgjaucNa7.jpg' },
+        { uri: 'https://image.tmdb.org/t/p/original/24Ov8wnusgnzXwjV1eDm0Lzo5da.jpg' },
+        { uri: 'https://image.tmdb.org/t/p/original/9Le7N3fmrHnWwdxCg35jSSawFyK.jpg' },
+    ];
 
     const handleBack = () => {
         navigation.navigate('HomeScreen');
-    }
+    };
 
     const handleShare = async () => {
         try {
             const result = await Share.share({
-                message:
-                    `${I18n.t('movie.share')}`,
+                message: `${I18n.t('movie.share')}`,
             });
             if (result.action === Share.sharedAction) {
                 if (result.activityType) {
@@ -33,6 +40,18 @@ const Header = () => {
             }
         } catch (error) {
             Alert.alert(error.message);
+        }
+    };
+
+    const handleNextImage = () => {
+        if (currentImageIndex < images.length - 1) {
+            setCurrentImageIndex(currentImageIndex + 1);
+        }
+    };
+
+    const handlePreviousImage = () => {
+        if (currentImageIndex > 0) {
+            setCurrentImageIndex(currentImageIndex - 1);
         }
     };
 
@@ -59,18 +78,18 @@ const Header = () => {
                     name='arrow-back-ios'
                     color={colors.white}
                     size={35}
+                    onPress={handlePreviousImage}
                 />
                 <Icon3
                     name='arrow-forward-ios'
                     color={colors.white}
                     size={35}
+                    onPress={handleNextImage}
                 />
             </View>
             <Image
                 style={styles.image}
-                source={{
-                    uri: 'https://image.tmdb.org/t/p/original/xY0oQFV7lj1uCdJmSvauiaF9ZOR.jpg',
-                }}
+                source={images[currentImageIndex]}
             />
         </View>
     );

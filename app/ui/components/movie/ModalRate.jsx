@@ -13,6 +13,11 @@ const ModalRate = ({ visible, onClose }) => {
     setRating(star);
   };
 
+  const handleSend = () => {
+    console.log('Rating:' + rating);
+    onClose()
+  }
+
   return (
     <Modal
       animationType="slide"
@@ -36,10 +41,7 @@ const ModalRate = ({ visible, onClose }) => {
               </TouchableOpacity>
             ))}
           </View>
-          <Button text={I18n.t('send')} action={() => {
-            onClose();
-            console.log(`Rating seleccionado: ${rating}`);
-          }} />
+          <Button text={I18n.t('send')} action={handleSend} />
         </View>
       </View>
     </Modal>
