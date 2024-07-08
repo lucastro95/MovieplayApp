@@ -6,11 +6,12 @@ import LargeMovieCard from '../home/LargeMovieCard';
 const MovieList = ({ movies, onEndReached }) => {
     const navigation = useNavigation();
 
-    const modifiedMovies = [
+    const modifiedMovies = movies.length > 0 ? [
         movies[0],
         { id: 'empty', empty: true },
         ...movies.slice(1)
-    ];
+    ] : [];
+    
     console.log(movies)
 
 
@@ -21,7 +22,10 @@ const MovieList = ({ movies, onEndReached }) => {
     const renderItem = ({ item, index }) => {
         if (index === 0) {
             return (
-                <LargeMovieCard title={item.title} imageUri={item.image} />
+                <Pressable onPress={() => handleMovie(item.id)}>
+                    <LargeMovieCard title={item.title} imageUri={item.image} />
+                </Pressable>
+
             );
         } else {
             return (
