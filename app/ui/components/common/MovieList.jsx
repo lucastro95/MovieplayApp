@@ -1,4 +1,5 @@
-import { FlatList, View, StyleSheet } from 'react-native'
+import { FlatList, View, StyleSheet, Pressable } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 import MovieCard from "../common/MovieCard"
 import LargeMovieCard from '../home/LargeMovieCard';
 
@@ -10,6 +11,12 @@ const MovieList = ({ movies, onEndReached }) => {
         ...movies.slice(1)
     ];
 
+    const navigation = useNavigation();
+
+    const handleMovie = (id) => {
+        navigation.navigate('MovieScreen', { id });
+    }
+
     const renderItem = ({ item, index }) => {
         if (index === 0) {
             return (
@@ -17,8 +24,10 @@ const MovieList = ({ movies, onEndReached }) => {
             );
         } else {
             return (
-                <MovieCard title={item.title} imageUri={item.image} />
-            )
+                <Pressable onPress={() => handleMovie(item.id)}>
+            <MovieCard title={item.title} imageUri={item.image} />
+                </Pressable>
+    )
         }
     };
 
@@ -39,7 +48,7 @@ const MovieList = ({ movies, onEndReached }) => {
 const styles = StyleSheet.create({
     layout: {
         flex: 2,
-    }
+    },
 })
 
 

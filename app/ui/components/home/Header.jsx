@@ -3,10 +3,9 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { colors } from '../../styles/RootColors';
 import Logo from '../../../assets/images/logo.png'
+import Genres from './Genres';
 
-const Header = () => {
-
-
+const Header = ({ genres, setGenre }) => {
     return (
         <View style={styles.container}>
             <LinearGradient 
@@ -15,20 +14,21 @@ const Header = () => {
               style={styles.linearGradient}>
               <Image source={Logo} style={styles.logo}/>
             </LinearGradient>
+            <Genres genres={genres} setGenre={setGenre}/>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: '30%', 
-    justifyContent: 'center', 
+    justifyContent: 'center',
+    flex: 1
   },
   linearGradient: {
     flex: 1, 
-    justifyContent: 'center', 
-    paddingHorizontal: 20, 
+    justifyContent: 'center',
+    alignItems:'center',
+    paddingHorizontal: 20
   },
   logo: {
     width: '100%', 

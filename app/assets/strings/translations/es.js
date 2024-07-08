@@ -10,7 +10,8 @@ export default {
         info: "Más información",
         genres: "Géneros",
         director: "Director",
-        actors: "Actores"
+        actors: "Actores",
+        share: "¡Compartí tu contenido favorito de MoviePlay!"
     },
     search: {
         input: "Titulo - Actor",
@@ -36,7 +37,7 @@ export default {
         changeImageNo: "Cancelar"
     },
     error: {
-        oops: "Ups, algo salió mal",
+        oops: "Ups, algo salió mal...",
         connection: "No hay conexión a Internet",
         tryAgain: "Volver a intentar" 
     },

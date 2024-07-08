@@ -23,15 +23,12 @@ const MovieCard = ({title, imageUri}) => {
 const styles = StyleSheet.create({
     card: {
       width: COLUMN_WIDTH, 
-      paddingHorizontal: '3%',
-
+      paddingHorizontal: '5%',
     },
 
     image: {
       width: '100%',
       height: 270,
-
-      
     },
     title: {
       paddingTop: 10,

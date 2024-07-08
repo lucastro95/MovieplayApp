@@ -1,20 +1,30 @@
-import React, { useState } from 'react';
-import { Modal, View, TextInput, StyleSheet, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Modal, View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import I18n from '../../../assets/strings/l18n';
 import { colors } from '../../styles/RootColors';
 import Button from '../common/Button';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-const EditPopup = ({ visible, onClose, onSave, fieldToEdit }) => {
-    const [name, setName] = useState("")
-    const [lastname, setLastname] = useState("")
-    const [nickname, setNickname] = useState("")
+const EditPopup = ({ visible, onClose, onSave, fieldToEdit, user }) => {
+    const [name, setName] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [nickname, setNickname] = useState("");
+
+    useEffect(() => {
+        if (fieldToEdit === 'name') {
+            setName(user.givenName);
+            setLastname(user.familyName);
+        } else {
+            setNickname(user.nickName);
+        }
+    }, [fieldToEdit, user]);
 
     const handleSave = () => {
         onSave(name, lastname, nickname);
         onClose();
-        setName("")
-        setLastname("")
-        setNickname("")
+        setName("");
+        setLastname("");
+        setNickname("");
     };
 
     return (
@@ -26,6 +36,9 @@ const EditPopup = ({ visible, onClose, onSave, fieldToEdit }) => {
         >
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
+                    <TouchableOpacity style={styles.close} onPress={onClose}>
+                        <Icon name='closecircleo' color={colors.pink} size={30} />
+                    </TouchableOpacity>
                     <Text style={styles.modalText}>{I18n.t("profile.edit")}</Text>
                     {fieldToEdit === "name" ?
                         <>
@@ -69,13 +82,19 @@ const styles = StyleSheet.create({
         backgroundColor: `${colors.white}`,
         borderRadius: 20,
         padding: 20,
+        paddingTop:40,
         alignItems: 'center',
     },
     modalText: {
-        marginBottom: 15,
+        marginBottom: 25,
         textAlign: 'center',
         fontSize: 20,
         color: `${colors.blue}`
+    },
+    close: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
     },
     input: {
         height: 40,
