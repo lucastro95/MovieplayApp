@@ -7,7 +7,7 @@ import Star from 'react-native-vector-icons/FontAwesome5';
 import { colors } from '../../styles/RootColors';
 import ModalRate from './ModalRate';
 
-const Actions = () => {
+const Actions = ({ movie }) => {
     const [favorite, setFavorite] = useState(false)
     const [modal, setModal] = useState(false)
 
@@ -41,7 +41,7 @@ const Actions = () => {
             <View style={styles.row}>
                 <View style={styles.rating}>
                     <Star name='star' color={colors.pink} size={40}/>
-                    <Text style={styles.text}>4.2 (2453)</Text>
+                    <Text style={styles.text}>{movie.movieRating === "NaN" ? `0 (0)`: `${movie.movieRating}`}</Text>
                 </View>
                 <View style={styles.rate}>
                     <Button text={I18n.t('movie.rate')} action={handleRate} />

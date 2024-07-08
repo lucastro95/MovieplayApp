@@ -23,7 +23,11 @@ const moviesWS = {
         }
 
         return response.data;
-    }
+    },
+    getMovieById: async function({ movieId, userId, language }) {
+        const response = await axios.get(`http://184.72.166.63:3000/movies/${movieId}/${userId}?language=${language}`);       
+        return response.data;
+    },
 }
 
 export default moviesWS;

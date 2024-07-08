@@ -3,14 +3,14 @@ import { Image, Text, View, StyleSheet } from 'react-native'
 import placeholder from '../../../assets/images/placeholder_user.png'
 import { colors } from '../../styles/RootColors'
 
-const Card = () => {
+const Card = ({ info }) => {
   return (
     <View style={styles.container}>
         <Image 
             style={styles.image}
-            source={placeholder}
+            source={info.img ? {uri: info.img} : placeholder}
         />
-        <Text style={styles.name}>Nombre Apellido</Text>
+        <Text style={styles.name}>{info.name}</Text>
     </View>
   )
 }

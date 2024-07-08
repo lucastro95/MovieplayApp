@@ -11,9 +11,6 @@ const MovieList = ({ movies, onEndReached }) => {
         { id: 'empty', empty: true },
         ...movies.slice(1)
     ] : [];
-    
-    console.log(movies)
-
 
     const handleMovie = (id) => {
         navigation.navigate('MovieScreen', { id });
@@ -57,4 +54,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default MovieList
+export default MovieList

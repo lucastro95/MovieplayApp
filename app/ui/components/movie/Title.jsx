@@ -4,18 +4,26 @@ import Icon from 'react-native-vector-icons/Feather';
 import { colors } from '../../styles/RootColors';
 import I18n from '../../../assets/strings/l18n';
 
-const Title = () => {
+const Title = ({ movie }) => {
+  const releaseYear = movie.releaseDate ? movie.releaseDate.split('-')[0] : '';
+
+  const convertMinutesToHours = (minutes) => {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    return `${hours}h ${remainingMinutes}m`;
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Dune: Part II</Text>
-      <Text style={styles.year}>{I18n.t('movie.release')}: 2024</Text>
+      <Text style={styles.title}>{movie.title}</Text>
+      <Text style={styles.year}>{I18n.t('movie.release')}: {releaseYear}</Text>
       <View style={styles.duration}>
         <Icon
           name='clock'
           color={colors.white}
           size={25}
         />
-        <Text style={styles.durationText}>2h 47m</Text>
+        <Text style={styles.durationText}>{convertMinutesToHours(movie.duration)}</Text>
       </View>
     </View>
   );

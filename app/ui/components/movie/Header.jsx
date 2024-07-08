@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, View, Dimensions, Share } from 'react-native';
+import { Image, StyleSheet, View, Dimensions, Share, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Entypo';
 import Icon3 from 'react-native-vector-icons/MaterialIcons';
@@ -9,16 +9,11 @@ import I18n from '../../../assets/strings/l18n';
 
 const { height } = Dimensions.get('window');
 
-const Header = () => {
+const Header = ({ movie }) => {
     const navigation = useNavigation();
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    const images = [
-        { uri: 'https://image.tmdb.org/t/p/original/xY0oQFV7lj1uCdJmSvauiaF9ZOR.jpg' },
-        { uri: 'https://image.tmdb.org/t/p/original/3jAmIiF931QuBAZ93OOgjaucNa7.jpg' },
-        { uri: 'https://image.tmdb.org/t/p/original/24Ov8wnusgnzXwjV1eDm0Lzo5da.jpg' },
-        { uri: 'https://image.tmdb.org/t/p/original/9Le7N3fmrHnWwdxCg35jSSawFyK.jpg' },
-    ];
+    const images = movie.imgPaths;
 
     const handleBack = () => {
         navigation.navigate('HomeScreen');
@@ -89,7 +84,7 @@ const Header = () => {
             </View>
             <Image
                 style={styles.image}
-                source={images[currentImageIndex]}
+                source={{ uri: images[currentImageIndex] }}
             />
         </View>
     );

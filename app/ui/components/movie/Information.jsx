@@ -4,23 +4,20 @@ import { colors } from '../../styles/RootColors';
 import I18n from '../../../assets/strings/l18n';
 import Card from './Card';
 
-const Information = () => {
-  const [actors, setActors] = useState([1, 2, 3, 4])
+const Information = ({ movie }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.desc}>
-        Follow the mythic journey of Paul Atreides as he unites with Chani and the Fremen while on a path of revenge against the conspirators who destroyed his family. Facing a choice between the love of his life and the fate of the known universe, Paul endeavors to prevent a terrible future only he can foresee.
-      </Text>
+      <Text style={styles.desc}>{movie.synopsis}</Text>
       <Text style={styles.moreInfo}>{I18n.t('movie.info')}</Text>
       <Text style={styles.subtitle}>{I18n.t('movie.genres')}</Text>
-      <Text style={styles.text}>Science Fiction, Adventure</Text>
+      <Text style={styles.text}>{movie.genres.join(', ')}</Text>
       <Text style={styles.subtitle}>{I18n.t('movie.director')}</Text>
-      <Card />
+      <Card info={movie.director}/>
       <Text style={styles.subtitle}>{I18n.t('movie.actors')}</Text>
       <FlatList
-        data={actors}
-        renderItem={() => <Card />}
-        keyExtractor={(item) => item.toString()}
+        data={movie.cast}
+        renderItem={(item) => <Card info={item.item}/>}
+        keyExtractor={(item) => item.index}
         horizontal 
         showsHorizontalScrollIndicator={false}
       />
