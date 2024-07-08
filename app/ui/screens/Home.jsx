@@ -21,7 +21,6 @@ const Home = () => {
   useEffect(() => {
     fetchMovies(true);
   }, [genre]); 
-  
 
   const fetchMovies = async (resetPage = false) => {
     try {

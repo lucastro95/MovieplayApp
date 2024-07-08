@@ -4,14 +4,15 @@ import MovieCard from "../common/MovieCard"
 import LargeMovieCard from '../home/LargeMovieCard';
 
 const MovieList = ({ movies, onEndReached }) => {
+    const navigation = useNavigation();
 
     const modifiedMovies = [
         movies[0],
         { id: 'empty', empty: true },
         ...movies.slice(1)
     ];
+    console.log(movies)
 
-    const navigation = useNavigation();
 
     const handleMovie = (id) => {
         navigation.navigate('MovieScreen', { id });
@@ -25,7 +26,7 @@ const MovieList = ({ movies, onEndReached }) => {
         } else {
             return (
                 <Pressable onPress={() => handleMovie(item.id)}>
-            <MovieCard title={item.title} imageUri={item.image} />
+                    <MovieCard title={item.title} imageUri={item.image} />
                 </Pressable>
     )
         }
@@ -52,5 +53,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default MovieList
-
+export default MovieList
