@@ -29,7 +29,6 @@ const Home = () => {
       const newPage = resetPage ? 1 : page;
       const response = await moviesWS.getMovies({ language, page: newPage, genre });
       setMovies(prevMovies => resetPage ? response : [...prevMovies, ...response]);
-      console.log(movies);
       setPage(newPage + 1);
       setLoading(false);
     } catch (error) {
@@ -62,12 +61,9 @@ const Home = () => {
         noconnection={noConnection} 
         onClose={handleCloseErrorModal}
       />
-      {loading ? <Loading /> : movies && (
-        <>
-          <Header genres={Generos} setGenre={setGenre}/>
-          <MovieList movies={movies} onEndReached={handleEndReached} />
-        </>
-      )}
+      {loading && <Loading />}
+      <Header genres={Generos} setGenre={setGenre}/>
+      <MovieList movies={movies} onEndReached={handleEndReached} />
     </View>
   );
 }

@@ -40,4 +40,9 @@ export default usersWS = {
         const response = await axios.put(`users/${user}/favorites/${movie}`);
         return response.data
     },
+
+    getFavourites: async function(user) {
+        const response = await axios.get(`users/${user.id}/favorites`)
+        return response.data
+    }
 }

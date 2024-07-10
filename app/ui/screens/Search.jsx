@@ -2,12 +2,12 @@ import { StyleSheet, View, Text, Keyboard } from "react-native";
 import { colors } from "../styles/RootColors";
 import SearchBar from "../components/search/SearchBar";
 import SearchSort from "../components/search/SearchSort";
-import MovieList from "../components/common/MovieList";
 import { useEffect, useState } from "react";
 import moviesWS from "../../networking/api/endpoints/moviesWS";
 import I18n from "../../assets/strings/l18n";
 import Loading from "../components/common/Loading";
 import ErrorModal from "../components/common/ErrorModal";
+import NormalMovieList from "../components/common/NormalMovieList";
 
 const Search = () => {
   const [input, setInput] = useState('');
@@ -70,7 +70,7 @@ const Search = () => {
       ) : (
         <>
           <SearchSort rating={rating} setRating={setRating} release={release} setRelease={setRelease} fetchMovies={fetchMovies}/>
-          <MovieList movies={movies} onEndReached={() => {}} />
+          <NormalMovieList movies={movies} onEndReached={() => {}} />
         </>
       )}
     </View>

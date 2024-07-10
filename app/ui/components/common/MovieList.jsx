@@ -1,11 +1,11 @@
-import { FlatList, View, StyleSheet, Pressable } from 'react-native'
+import { FlatList, View, StyleSheet, Pressable, Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import MovieCard from "../common/MovieCard"
 import LargeMovieCard from '../home/LargeMovieCard';
 
 const MovieList = ({ movies, onEndReached }) => {
     const navigation = useNavigation();
-
+    
     const modifiedMovies = movies.length > 0 ? [
         movies[0],
         { id: 'empty', empty: true },
@@ -42,6 +42,8 @@ const MovieList = ({ movies, onEndReached }) => {
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={2}
                 onEndReached={onEndReached}
+                onEndReachedThreshold={0.5}
+
             />
         </View>
     )
