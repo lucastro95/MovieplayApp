@@ -31,5 +31,13 @@ export default usersWS = {
         const response = await axios.put(`users/${id}`, requestBody);
 
         return response.data;
-    }
+    },
+    addFavourite: async function(user, movie) {
+        const response = await axios.put(`users/${user}/favorites/${movie}`);
+        return response.data
+    },
+    deleteFavourite: async function(user, movie) {
+        const response = await axios.put(`users/${user}/favorites/${movie}`);
+        return response.data
+    },
 }

@@ -6,6 +6,7 @@ import Icon3 from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../../styles/RootColors';
 import { useNavigation } from '@react-navigation/native';
 import I18n from '../../../assets/strings/l18n';
+import placeholder from '../../../assets/images/placeholder_movie.png'
 
 const { height } = Dimensions.get('window');
 
@@ -68,23 +69,25 @@ const Header = ({ movie }) => {
                     onPress={handleShare}
                 />
             </View>
-            <View style={styles.moveBtn}>
-                <Icon3
-                    name='arrow-back-ios'
-                    color={colors.white}
-                    size={35}
-                    onPress={handlePreviousImage}
-                />
-                <Icon3
-                    name='arrow-forward-ios'
-                    color={colors.white}
-                    size={35}
-                    onPress={handleNextImage}
-                />
-            </View>
+            {images.length !== 0 && (
+                <View style={styles.moveBtn}>
+                    <Icon3
+                        name='arrow-back-ios'
+                        color={colors.white}
+                        size={35}
+                        onPress={handlePreviousImage}
+                    />
+                    <Icon3
+                        name='arrow-forward-ios'
+                        color={colors.white}
+                        size={35}
+                        onPress={handleNextImage}
+                    />
+                </View>
+            )}
             <Image
                 style={styles.image}
-                source={{ uri: images[currentImageIndex] }}
+                source={images.length === 0 ? placeholder : { uri: images[currentImageIndex] }}
             />
         </View>
     );

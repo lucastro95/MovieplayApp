@@ -50,23 +50,28 @@ const Movie = ({ route }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <ErrorModal
-          visible={errorVisible}
-          noconnection={noConnection}
-          onClose={handleCloseErrorModal}
-        />
-        {loading ? <Loading /> : movie && (
-          <>
-            <Header movie={movie} />
-            <Title movie={movie} />
-            <Actions movie={movie} />
-            <Information movie={movie} />
-          </>
-        )}
-      </ScrollView>
-    </SafeAreaView>
+    <>
+      {loading ? <Loading /> :
+
+        <SafeAreaView style={styles.container}>
+          <ScrollView contentContainerStyle={styles.scrollViewContent}>
+            <ErrorModal
+              visible={errorVisible}
+              noconnection={noConnection}
+              onClose={handleCloseErrorModal}
+            />
+            {movie && (
+              <>
+                <Header movie={movie} />
+                <Title movie={movie} />
+                <Actions movie={movie} />
+                <Information movie={movie} />
+              </>
+            )}
+          </ScrollView>
+        </SafeAreaView>
+      }
+    </>
   );
 };
 
