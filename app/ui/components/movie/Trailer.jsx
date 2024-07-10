@@ -3,6 +3,7 @@ import { Modal, StyleSheet, TouchableOpacity, View, Alert, Button, Text } from '
 import Icon from 'react-native-vector-icons/AntDesign';
 import { colors } from '../../styles/RootColors';
 import YoutubePlayer from "react-native-youtube-iframe";
+import I18n from '../../../assets/strings/l18n';
 
 const Trailer = ({ visible, onClose, movie }) => {
     const [playing, setPlaying] = useState(false);
@@ -25,14 +26,17 @@ const Trailer = ({ visible, onClose, movie }) => {
                     <TouchableOpacity style={styles.close} onPress={onClose}>
                         <Icon name='close' color={colors.pink} size={35} />
                     </TouchableOpacity>
-                    <View style={styles.video}>
-                        <YoutubePlayer
-                            height={200}
-                            play={playing}
-                            videoId={movie.video}
-                            onChangeState={onStateChange}
-                        />
-                    </View>
+                    {movie.video ?
+                        <View style={styles.video}>
+                            <YoutubePlayer
+                                height={200}
+                                play={playing}
+                                videoId={movie.video}
+                                onChangeState={onStateChange}
+                            />
+                        </View> :
+                        <Text style={styles.text}>{I18n.t('movie.noTrailer')}</Text>
+                    }
                 </View>
             </View>
         </Modal>
@@ -61,6 +65,11 @@ const styles = StyleSheet.create({
     },
     video: {
         width: '100%'
+    },
+    text: {
+        color: `${colors.white}`,
+        fontSize: 30,
+        textAlign: "center"
     }
 });
 

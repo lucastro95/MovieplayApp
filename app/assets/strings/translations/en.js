@@ -11,7 +11,8 @@ export default {
         genres: "Genres",
         director: "Director",
         actors: "Actors",
-        share: "Share your favorite content from MoviePlay!"
+        share: "Share your favorite content from MoviePlay!",
+        noTrailer: "There's no trailer available"
     },
     search: {
         input: "Title - Actor",
