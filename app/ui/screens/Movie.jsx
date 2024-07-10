@@ -64,7 +64,7 @@ const Movie = ({ route }) => {
               <>
                 <Header movie={movie} />
                 <Title movie={movie} />
-                <Actions movie={movie} />
+                <Actions movie={movie} user={user}/>
                 <Information movie={movie} />
               </>
             )}

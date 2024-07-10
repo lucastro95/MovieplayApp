@@ -6,7 +6,7 @@ import I18n from '../../../assets/strings/l18n';
 import { colors } from '../../styles/RootColors';
 import Button from '../common/Button';
 
-const ModalRate = ({ visible, onClose }) => {
+const ModalRate = ({ visible, onClose, user }) => {
   const [rating, setRating] = useState(0);
 
   const handleStarPress = (star) => {

@@ -37,7 +37,7 @@ export default usersWS = {
         return response.data
     },
     deleteFavourite: async function(user, movie) {
-        const response = await axios.put(`users/${user}/favorites/${movie}`);
+        const response = await axios.delete(`users/${user}/favorites/${movie}`);
         return response.data
     },
 

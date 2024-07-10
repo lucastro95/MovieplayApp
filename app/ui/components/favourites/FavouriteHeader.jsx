@@ -2,9 +2,9 @@ import React from 'react'
 import { Animated, StyleSheet } from 'react-native'
 import Icon1 from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icon2 from 'react-native-vector-icons/FontAwesome5'
-import { colors } from '../../../../MovieplayApp/app/ui/styles/RootColors'
 import { Text } from 'react-native-animatable'
 import I18n from '../../../assets/strings/l18n'
+import { colors } from '../../styles/RootColors'
 
 const FavouriteHeader = () => {
 

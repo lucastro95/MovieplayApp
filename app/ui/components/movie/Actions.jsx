@@ -7,13 +7,23 @@ import Star from 'react-native-vector-icons/FontAwesome5';
 import { colors } from '../../styles/RootColors';
 import ModalRate from './ModalRate';
 import Trailer from './Trailer';
+import usersWS from '../../../networking/api/endpoints/usersWS';
 
-const Actions = ({ movie }) => {
-    const [favorite, setFavorite] = useState(false)
+const Actions = ({ movie, user }) => {
+    const [favorite, setFavorite] = useState(movie.favorite)
     const [modal, setModal] = useState(false)
     const [trailer, setTrailer] = useState(false)
 
-    const handleFavorite = () => {
+    const handleFavorite = async () => {
+        try {
+            if(favorite) {
+                await usersWS.deleteFavourite(user, movie.id)
+            } else {
+                await usersWS.addFavourite(user, movie.id)
+            }
+        } catch (error) {
+            console.log(error);
+        }
         setFavorite(!favorite)
     }
 
@@ -57,7 +67,7 @@ const Actions = ({ movie }) => {
                     <Button text={I18n.t('movie.rate')} action={handleRate} />
                 </View>
             </View>
-            {modal && <ModalRate visible={modal} onClose={handleCloseModal}/>}
+            {modal && <ModalRate visible={modal} onClose={handleCloseModal} user={user}/>}
         </View>
     )
 }
