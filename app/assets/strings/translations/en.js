@@ -21,7 +21,8 @@ export default {
         error: "No results found..."
     },
     favourite: {
-        title: "Your Favourites"
+        title: "Your Favourites",
+        noFavourties: "You have no favourites yet"
     },
     profile: {
         logOut: "Log Out",

@@ -21,7 +21,8 @@ export default {
         error: "No hay resultados..."
     },
     favourite: {
-        title: "Tus Favoritos"
+        title: "Tus Favoritos",
+        noFavourites: "No tienes favoritos todavía"
     },
     profile: {
         logOut: "Cerrar Sesión",

@@ -64,7 +64,7 @@ const Movie = ({ route }) => {
               <>
                 <Header movie={movie} />
                 <Title movie={movie} />
-                <Actions movie={movie} user={user}/>
+                <Actions movie={movie} user={user} setErrorVisible={setErrorVisible} setNoConnection={setNoConnection}/>
                 <Information movie={movie} />
               </>
             )}

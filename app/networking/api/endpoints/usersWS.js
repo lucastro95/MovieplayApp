@@ -42,7 +42,7 @@ export default usersWS = {
     },
 
     getFavourites: async function(user) {
-        const response = await axios.get(`users/${user.id}/favorites`)
+        const response = await axios.get(`users/${user}/favorites`)
         return response.data
     }
 }

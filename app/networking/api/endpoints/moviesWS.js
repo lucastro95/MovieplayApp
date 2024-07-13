@@ -28,6 +28,11 @@ const moviesWS = {
         const response = await axios.get(`http://184.72.166.63:3000/movies/${movieId}/${userId}?language=${language}`);       
         return response.data;
     },
+    rateMovie: async function(movieId, userId, rate) {
+        const response = await axios.post(`http://184.72.166.63:3000/movies/${movieId}/${userId}?rating=${rate}`)
+        console.log(response.data);
+        return response.data;
+    }
 }
 
 export default moviesWS;

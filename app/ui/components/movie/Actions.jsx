@@ -9,20 +9,26 @@ import ModalRate from './ModalRate';
 import Trailer from './Trailer';
 import usersWS from '../../../networking/api/endpoints/usersWS';
 
-const Actions = ({ movie, user }) => {
+const Actions = ({ movie, user, setErrorVisible, setNoConnection }) => {
     const [favorite, setFavorite] = useState(movie.favorite)
     const [modal, setModal] = useState(false)
     const [trailer, setTrailer] = useState(false)
 
     const handleFavorite = async () => {
         try {
-            if(favorite) {
+            if (favorite) {
                 await usersWS.deleteFavourite(user, movie.id)
             } else {
                 await usersWS.addFavourite(user, movie.id)
             }
         } catch (error) {
             console.log(error);
+            setErrorVisible(true);
+            if (error.message.includes("Network Error")) {
+                setNoConnection(true);
+            } else {
+                setNoConnection(false);
+            }
         }
         setFavorite(!favorite)
     }
@@ -31,7 +37,7 @@ const Actions = ({ movie, user }) => {
         setModal(false)
     }
 
-    const handleRate = () => {
+    const handleRate = async () => {
         setModal(true)
     }
 
@@ -41,33 +47,33 @@ const Actions = ({ movie, user }) => {
 
     return (
         <View>
-            <Trailer 
+            <Trailer
                 visible={trailer}
                 onClose={handleCloseTrailer}
-                movie={movie}/>
+                movie={movie} />
             <View style={styles.row}>
                 <View style={styles.watch}>
-                    <Button text={I18n.t('movie.watch')} action={() => {setTrailer(true)}} />
+                    <Button text={I18n.t('movie.watch')} action={() => { setTrailer(true) }} />
                 </View>
                 <View style={styles.fav}>
-                    <Fav 
-                        name="bookmark" 
-                        color={favorite ? colors.pink : colors.white} 
+                    <Fav
+                        name="bookmark"
+                        color={favorite ? colors.pink : colors.white}
                         size={50}
                         onPress={handleFavorite}
-                        />
+                    />
                 </View>
             </View>
             <View style={styles.row}>
                 <View style={styles.rating}>
-                    <Star name='star' color={colors.pink} size={40}/>
-                    <Text style={styles.text}>{movie.movieRating === "NaN" ? `0 (0)`: `${movie.movieRating}`}</Text>
+                    <Star name='star' color={colors.pink} size={40} />
+                    <Text style={styles.text}>{movie.movieRating === "NaN" ? `0 (0)` : `${parseInt(movie.movieRating) / movie.numRating} (${movie.numRating})`}</Text>
                 </View>
                 <View style={styles.rate}>
                     <Button text={I18n.t('movie.rate')} action={handleRate} />
                 </View>
             </View>
-            {modal && <ModalRate visible={modal} onClose={handleCloseModal} user={user}/>}
+            {modal && <ModalRate visible={modal} onClose={handleCloseModal} user={user} movieId={movie.id}/>}
         </View>
     )
 }

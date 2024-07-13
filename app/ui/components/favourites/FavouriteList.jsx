@@ -2,7 +2,7 @@ import { FlatList, View, StyleSheet, Pressable } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import FavouriteCard from './FavouriteCard';
 
-const FavouriteList = ({ favourites, onEndReached }) => {
+const FavouriteList = ({ favourites, setNoConnection, setErrorVisible, fetchFavourites }) => {
     const navigation = useNavigation();
 
     const handleMovie = (id) => {
@@ -12,7 +12,7 @@ const FavouriteList = ({ favourites, onEndReached }) => {
     const renderItem = ({ item }) => {
          return (
             <Pressable onPress={() => handleMovie(item.id)}>
-                <FavouriteCard title={item.title} imageUri={item.image} />
+                <FavouriteCard movie={item} setNoConnection={setNoConnection} setErrorVisible={setErrorVisible} fetchFavourites={fetchFavourites}/>
             </Pressable>
     )
         }
@@ -24,7 +24,6 @@ const FavouriteList = ({ favourites, onEndReached }) => {
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={2}
-                onEndReached={onEndReached}
             />
         </View>
     )

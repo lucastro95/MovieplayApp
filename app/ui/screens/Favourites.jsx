@@ -6,28 +6,26 @@ import ErrorModal from "../components/common/ErrorModal";
 import FavouriteList from "../components/favourites/FavouriteList";
 import usersWS from "../../networking/api/endpoints/usersWS";
 import FavouriteHeader from "../components/favourites/FavouriteHeader";
-
+import { useSelector } from "react-redux";
+import Loading from "../components/common/Loading";
 
 const Favourites = () => {
+  const user = useSelector(state => state.user.id);
+
   const [favourites, setFavourites] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorVisible, setErrorVisible] = useState(false);
   const [noConnection, setNoConnection] = useState(false);
-  const [page, setPage] = useState(1)
-  const language = I18n.locale;
 
   useEffect(() => {
-    fetchFavourites(true);
+    fetchFavourites();
   }, []);
 
-  const fetchFavourites = async (resetPage = false) => {
+  const fetchFavourites = async () => {
     try {
       setLoading(true);
-      if (resetPage) setFavourites([]);
-      const newPage = resetPage ? 1 : page;
-      const response = await usersWS.getFavourites({ language, page: newPage, genre });
-      setFavourites(prevFavourites => resetPage ? response : [...prevFavourites, ...response]);
-      setPage(newPage + 1);
+      const response = await usersWS.getFavourites(user);
+      setFavourites(response);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -41,32 +39,35 @@ const Favourites = () => {
     }
   };
 
-
-  const handleEndReached = () => {
-    if (!loading) {
-      fetchMovies();
-    }
-  };
-
   const handleCloseErrorModal = () => {
     setErrorVisible(false);
     setNoConnection(false);
   };
 
   return (
-    <View style={styles.container}>
-       <ErrorModal 
-        visible={errorVisible} 
-        noconnection={noConnection} 
-        onClose={handleCloseErrorModal}
-      />
-      <FavouriteHeader/>
-      <FavouriteList movies={favourites} onEndReached={handleEndReached}></FavouriteList>
-
-    </View>
-  )
-}
-
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <View style={styles.container}>
+          <ErrorModal
+            visible={errorVisible}
+            noconnection={noConnection}
+            onClose={handleCloseErrorModal}
+          />
+          <FavouriteHeader />
+          {favourites.length > 0 ? (
+            <FavouriteList favourites={favourites} setNoConnection={setNoConnection} setErrorVisible={setErrorVisible} fetchFavourites={fetchFavourites}/>
+          ) : (
+            <Text style={styles.errorText}>
+              {I18n.t('favourite.noFavourites')}
+            </Text>
+          )}
+        </View>
+      )}
+    </>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -74,6 +75,12 @@ const styles = StyleSheet.create({
     minHeight: '100%',
     backgroundColor: `${colors.black}`
   },
+  errorText: {
+    fontSize: 20,
+    color: `${colors.white}`,
+    marginTop: 200,
+    textAlign: 'center'
+  }
 });
 
-export default Favourites
+export default Favourites;

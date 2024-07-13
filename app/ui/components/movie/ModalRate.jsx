@@ -5,16 +5,21 @@ import Star from 'react-native-vector-icons/FontAwesome';
 import I18n from '../../../assets/strings/l18n';
 import { colors } from '../../styles/RootColors';
 import Button from '../common/Button';
+import moviesWS from '../../../networking/api/endpoints/moviesWS';
 
-const ModalRate = ({ visible, onClose, user }) => {
+const ModalRate = ({ visible, onClose, user, movieId }) => {
   const [rating, setRating] = useState(0);
 
   const handleStarPress = (star) => {
     setRating(star);
   };
 
-  const handleSend = () => {
-    console.log('Rating:' + rating);
+  const handleSend = async () => {
+    try {
+      await moviesWS.rateMovie(movieId, user, rating)
+    } catch (error) {
+      console.log(error);
+    }
     onClose()
   }
 
