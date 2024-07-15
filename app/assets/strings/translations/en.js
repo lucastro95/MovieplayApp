@@ -22,7 +22,7 @@ export default {
     },
     favourite: {
         title: "Your Favourites",
-        noFavourties: "You have no favourites yet"
+        noFavourites: "You have no favourites yet"
     },
     profile: {
         logOut: "Log Out",
