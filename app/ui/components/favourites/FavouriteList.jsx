@@ -1,5 +1,6 @@
 import { FlatList, View, StyleSheet, Pressable } from 'react-native'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useState, useEffect } from 'react';
 import FavouriteCard from './FavouriteCard';
 
 const FavouriteList = ({ favourites, setNoConnection, setErrorVisible, fetchFavourites }) => {

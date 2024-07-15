@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text } from "react-native";
 import { colors } from "../styles/RootColors";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import I18n from "../../assets/strings/l18n";
 import ErrorModal from "../components/common/ErrorModal";
 import FavouriteList from "../components/favourites/FavouriteList";
@@ -8,10 +8,10 @@ import usersWS from "../../networking/api/endpoints/usersWS";
 import FavouriteHeader from "../components/favourites/FavouriteHeader";
 import { useSelector } from "react-redux";
 import Loading from "../components/common/Loading";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Favourites = () => {
   const user = useSelector(state => state.user.id);
-
   const [favourites, setFavourites] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorVisible, setErrorVisible] = useState(false);
@@ -43,6 +43,12 @@ const Favourites = () => {
     setErrorVisible(false);
     setNoConnection(false);
   };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchFavourites();
+    }, [])
+  );
 
   return (
     <>
