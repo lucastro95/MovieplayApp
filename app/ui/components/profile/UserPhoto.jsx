@@ -7,42 +7,72 @@ import placeholder from "../../../assets/images/placeholder_user.png"
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch } from 'react-redux'
 import { editImage } from '../../../redux/slices/UserSlice'
+import axios from 'axios';
 
 const UserPhoto = ({ user, setPendingUpdate }) => {
     const dispatch = useDispatch();
+    const YOUR_CLOUD_NAME = 'dq7tfnrso';
+    const YOUR_UPLOAD_PRESET = 'd0znkzh9';
 
     const getImageSource = () => {
         return user.photo ? { uri: user.photo } : placeholder;
     };
 
-    const addImage = () => {
-        launchImageLibrary(options, response => {    
+
+    const selectImage = async () => {
+      return new Promise((resolve, reject) => {
+        launchImageLibrary({mediaType: 'photo'}, (response) => {
           if (response.didCancel) {
-            console.log('User cancelled image picker');
-          } else if (response.errorCode) {
-            console.log('ImagePicker Error: ', response.errorCode);
+            reject('User cancelled image picker');
+          } else if (response.error) {
+            reject(response.error);
           } else {
-            const asset = response.assets[0];
-            const photo = `data:image/jpeg;base64,${asset.base64}`;
-            dispatch(editImage(photo))
-            setPendingUpdate(true);
+            const {uri} = response.assets[0];
+            resolve(uri);
           }
         });
+      });
+    };
+
+
+    const uploadImageToCloudinary = async (imageUri) => {
+      const data = new FormData();
+      data.append('file', {
+          uri: imageUri,
+          type: 'image/jpeg',
+          name: 'upload.jpg',
+      });
+      data.append('upload_preset', YOUR_UPLOAD_PRESET);
+
+      try {
+          const response = await axios.post(`https://api.cloudinary.com/v1_1/${YOUR_CLOUD_NAME}/image/upload`, data, {
+              headers: {
+                  'Content-Type': 'multipart/form-data',
+              },
+          });
+          return response.data.secure_url;
+      } catch (error) {
+        console.error('Error al subir la imagen a Cloudinary:', error.response ? error.response.data : error);
+        throw error;
       }
-    
-      const options = {
-        title: 'Agregar Foto',
-        storageOptions: {
-          skipBakup: true,
-          path: 'images'
-        },
-        includeBase64: true
+  };
+
+    const selectAndUploadImage = async () => {
+      try {
+         const imageUri = await selectImage();
+         const imageUrl = await uploadImageToCloudinary(imageUri);
+         dispatch(editImage(imageUrl))
+         setPendingUpdate(true)
+         
+      } catch (error) {
+        console.error('Error en el proceso de selección y subida de imagen:', error);
       }
+    }
     
     return (
         <View style={styles.imageContainer}>
             <Image style={styles.image} source={getImageSource()} />
-            <TouchableOpacity onPress={addImage}>
+            <TouchableOpacity onPress={selectAndUploadImage}>
                 <Icon style={styles.addImage} name='plus-circle' color={colors.pink} size={50} />
             </TouchableOpacity>
         </View>
