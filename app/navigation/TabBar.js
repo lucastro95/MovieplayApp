@@ -8,6 +8,8 @@ import Favourites from "../ui/screens/Favourites";
 import Profile from "../ui/screens/Profile";
 import LandingStackNavigator from "./LandingStackNavigator";
 import Routes from "./Routes";
+import SearchStackNavigator from "./SearchStackNavigator";
+import FavouriteStackNavigator from "./FavouriteStackNavigator";
 
 const Tab = createBottomTabNavigator()
 
@@ -31,8 +33,8 @@ const TabBar = () => {
         }}
       />
       <Tab.Screen
-        name={Routes.SearchScreen}
-        component={Search}
+        name={Routes.SearchStackNavigator}
+        component={SearchStackNavigator}
         options={{
           tabBarShowLabel: false,
           tabBarIcon: ({ focused }) => (
@@ -41,8 +43,8 @@ const TabBar = () => {
         }}
       />
       <Tab.Screen
-        name={Routes.FavouritesScreen}
-        component={Favourites}
+        name={Routes.FavouriteStackNavigator}
+        component={FavouriteStackNavigator}
         options={{
           tabBarShowLabel: false,
           tabBarIcon: ({ focused }) => (

@@ -50,6 +50,7 @@ const UserPhoto = ({ user, setPendingUpdate }) => {
                   'Content-Type': 'multipart/form-data',
               },
           });
+          console.log(response);
           return response.data.secure_url;
       } catch (error) {
         console.error('Error al subir la imagen a Cloudinary:', error.response ? error.response.data : error);

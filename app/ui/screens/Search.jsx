@@ -20,7 +20,9 @@ const Search = () => {
   const language = I18n.locale;
 
   useEffect(() => {
+    if (input) {
       fetchMovies();
+    }
   }, [rating, release]);
 
   const fetchMovies = async () => {
@@ -54,25 +56,25 @@ const Search = () => {
 
   return (
     <View style={styles.container}>
-      <ErrorModal 
-        visible={errorVisible} 
-        noconnection={noConnection} 
+      <ErrorModal
+        visible={errorVisible}
+        noconnection={noConnection}
         onClose={handleCloseErrorModal}
       />
       {loading && <Loading />}
-      <SearchBar input={input} setInput={setInput} fetchMovies={fetchMovies}/>
-      
-      {movies === null ? null : 
-      movies.length === 0 ? ( 
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>{I18n.t('search.error')}</Text>
-        </View>
-      ) : (
-        <>
-          <SearchSort rating={rating} setRating={setRating} release={release} setRelease={setRelease} fetchMovies={fetchMovies}/>
-          <NormalMovieList movies={movies} onEndReached={() => {}} />
-        </>
-      )}
+      <SearchBar input={input} setInput={setInput} fetchMovies={fetchMovies} />
+
+      {movies === null ? null :
+        movies.length === 0 ? (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>{I18n.t('search.error')}</Text>
+          </View>
+        ) : (
+          <>
+            <SearchSort rating={rating} setRating={setRating} release={release} setRelease={setRelease} fetchMovies={fetchMovies} />
+            <NormalMovieList movies={movies} onEndReached={() => { }} />
+          </>
+        )}
     </View>
   );
 };

@@ -17,7 +17,7 @@ const Header = ({ movie }) => {
     const images = movie.imgPaths;
 
     const handleBack = () => {
-        navigation.navigate('HomeScreen');
+        navigation.pop();
     };
 
     const handleShare = async () => {
