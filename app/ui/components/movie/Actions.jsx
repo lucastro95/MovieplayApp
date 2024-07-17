@@ -67,7 +67,7 @@ const Actions = ({ movie, user, setErrorVisible, setNoConnection }) => {
             <View style={styles.row}>
                 <View style={styles.rating}>
                     <Star name='star' color={colors.pink} size={40} />
-                    <Text style={styles.text}>{movie.movieRating === "NaN" ? `0 (0)` : `${parseInt(movie.movieRating) / movie.numRating} (${movie.numRating})`}</Text>
+                    <Text style={styles.text}>{movie.movieRating === null ? `0 (0)` : `${movie.movieRating} (${movie.numRating})`}</Text>
                 </View>
                 <View style={styles.rate}>
                     <Button text={I18n.t('movie.rate')} action={handleRate} />

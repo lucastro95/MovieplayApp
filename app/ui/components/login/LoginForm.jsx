@@ -13,12 +13,15 @@ import { logIn } from "../../../redux/slices/UserSlice";
 import loginWS from "../../../networking/api/endpoints/loginWS";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "../common/Loading";
+import ErrorModal from "../common/ErrorModal";
 
 const LoginForm = () => {
   const dispatch = useDispatch()
   const navigation = useNavigation()
   const loggedIn = useSelector((state) => state.user.loggedIn);
   const [loading, setLoading] = useState(false)
+  const [errorVisible, setErrorVisible] = useState(false);
+  const [noConnection, setNoConnection] = useState(false);
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -51,13 +54,29 @@ const LoginForm = () => {
 
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      setErrorVisible(true);
+      if (error.message.includes("Network Error")) {
+        setNoConnection(true);
+      } else {
+        setNoConnection(false);
+      }
     }
+  };
+
+  const handleCloseErrorModal = () => {
+    setErrorVisible(false);
+    setNoConnection(false);
   };
 
   return (
     <View style={styles.container}>
       {loading && <Loading />}
+      <ErrorModal
+        visible={errorVisible}
+        noconnection={noConnection}
+        onClose={handleCloseErrorModal}
+      />
       <View style={styles.form}>
         <Text style={styles.text}>{I18n.t('signIn.sign')}</Text>
         <TouchableHighlight
@@ -103,4 +122,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default LoginForm
+export default LoginForm
