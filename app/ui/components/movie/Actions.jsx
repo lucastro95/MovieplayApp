@@ -9,7 +9,7 @@ import ModalRate from './ModalRate';
 import Trailer from './Trailer';
 import usersWS from '../../../networking/api/endpoints/usersWS';
 
-const Actions = ({ movie, user, setErrorVisible, setNoConnection }) => {
+const Actions = ({ movie, user, setErrorVisible, setNoConnection, onRefresh }) => {
     const [favorite, setFavorite] = useState(movie.favorite)
     const [modal, setModal] = useState(false)
     const [trailer, setTrailer] = useState(false)
@@ -45,6 +45,11 @@ const Actions = ({ movie, user, setErrorVisible, setNoConnection }) => {
         setTrailer(false)
     }
 
+    const handleModalClose = () => {
+        setModal(false);
+        onRefresh();
+    }
+
     return (
         <View>
             <Trailer
@@ -73,7 +78,7 @@ const Actions = ({ movie, user, setErrorVisible, setNoConnection }) => {
                     <Button text={I18n.t('movie.rate')} action={handleRate} />
                 </View>
             </View>
-            {modal && <ModalRate visible={modal} onClose={handleCloseModal} user={user} movieId={movie.id}/>}
+            {modal && <ModalRate visible={modal} onClose={handleModalClose} user={user} movieId={movie.id}/>}
         </View>
     )
 }

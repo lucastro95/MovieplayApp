@@ -14,13 +14,14 @@ import ErrorModal from '../components/common/ErrorModal';
 
 const Movie = ({ route }) => {
   const { id } = route.params;
-  const user = useSelector(state => state.user.id)
+  const user = useSelector(state => state.user.id);
   const language = I18n.locale;
 
-  const [movie, setMovie] = useState(null)
+  const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errorVisible, setErrorVisible] = useState(false);
   const [noConnection, setNoConnection] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,20 +40,23 @@ const Movie = ({ route }) => {
           setNoConnection(false);
         }
       }
-    }
+    };
 
     fetchData();
-  }, [id, user, language]);
+  }, [id, user, language, refresh]);
 
   const handleCloseErrorModal = () => {
     setErrorVisible(false);
     setNoConnection(false);
   };
 
+  const handleRefresh = () => {
+    setRefresh(prev => !prev);
+  };
+
   return (
     <>
       {loading ? <Loading /> :
-
         <SafeAreaView style={styles.container}>
           <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <ErrorModal
@@ -64,7 +68,13 @@ const Movie = ({ route }) => {
               <>
                 <Header movie={movie} />
                 <Title movie={movie} />
-                <Actions movie={movie} user={user} setErrorVisible={setErrorVisible} setNoConnection={setNoConnection}/>
+                <Actions 
+                  movie={movie} 
+                  user={user} 
+                  setErrorVisible={setErrorVisible} 
+                  setNoConnection={setNoConnection} 
+                  onRefresh={handleRefresh}
+                />
                 <Information movie={movie} />
               </>
             )}

@@ -16,12 +16,12 @@ const ModalRate = ({ visible, onClose, user, movieId }) => {
 
   const handleSend = async () => {
     try {
-      await moviesWS.rateMovie(movieId, user, rating)
+      await moviesWS.rateMovie(movieId, user, rating);
     } catch (error) {
       console.log(error);
     }
-    onClose()
-  }
+    onClose();
+  };
 
   return (
     <Modal
@@ -50,7 +50,7 @@ const ModalRate = ({ visible, onClose, user, movieId }) => {
         </View>
       </View>
     </Modal>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
