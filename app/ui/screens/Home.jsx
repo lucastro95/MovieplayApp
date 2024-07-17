@@ -62,7 +62,7 @@ const Home = () => {
         onClose={handleCloseErrorModal}
       />
       {loading && <Loading />}
-      <Header genres={Generos} setGenre={setGenre}/>
+      <Header genres={Generos} setGenre={setGenre} genre={genre}/>
       <MovieList movies={movies} onEndReached={handleEndReached} />
     </View>
   );

@@ -5,7 +5,7 @@ import { colors } from '../../styles/RootColors';
 import Logo from '../../../assets/images/logo.png'
 import Genres from './Genres';
 
-const Header = ({ genres, setGenre }) => {
+const Header = ({ genres, setGenre, genre }) => {
     return (
         <View style={styles.container}>
             <LinearGradient 
@@ -14,7 +14,7 @@ const Header = ({ genres, setGenre }) => {
               style={styles.linearGradient}>
               <Image source={Logo} style={styles.logo}/>
             </LinearGradient>
-            <Genres genres={genres} setGenre={setGenre}/>
+            <Genres genres={genres} setGenre={setGenre} genre={genre}/>
         </View>
     );
 }

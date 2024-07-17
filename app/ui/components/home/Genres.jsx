@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FlatList, View, StyleSheet, Text, TouchableHighlight } from 'react-native';
 import { colors } from '../../styles/RootColors';
 
-const Genres = ({ genres, setGenre }) => {
+const Genres = ({ genres, setGenre, genre }) => {
+  const [selectedGenre, setSelectedGenre] = useState(null);
 
   const handleGenre = (id) => {
-    setGenre(id)
+    setSelectedGenre(id);
+    if (id === genre) {
+      setGenre(null)
+      setSelectedGenre(null);
+    } else {
+      setGenre(id);
+    }
   }
 
   const renderItem = ({ item }) => (
-    <TouchableHighlight style={styles.button} onPress={() => handleGenre(item.id)}>
-      <Text style={styles.buttonText}>{item.name}</Text>
+    <TouchableHighlight
+      style={[styles.button, item.id === selectedGenre && styles.selectedButton]}
+      onPress={() => handleGenre(item.id)}
+    >
+      <Text style={[styles.buttonText, item.id === selectedGenre && styles.selectedButtonText]}>{item.name}</Text>
     </TouchableHighlight>
   );
 
@@ -20,7 +30,7 @@ const Genres = ({ genres, setGenre }) => {
         data={genres}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
-        horizontal 
+        horizontal
         showsHorizontalScrollIndicator={false}
       />
     </View>
@@ -41,9 +51,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  selectedButton: {
+    backgroundColor: `${colors.white}`,
+  },
   buttonText: {
     color: `${colors.white}`,
     fontSize: 20
+  },
+  selectedButtonText: {
+    color: `${colors.pink}`,
   }
 });
 
