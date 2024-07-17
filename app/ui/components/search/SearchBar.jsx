@@ -10,6 +10,12 @@ const SearchBar = ({ input, setInput, fetchMovies }) => {
         setInput(text);
     };
 
+    const handleSearch = () => {
+        if(input !== "") {
+            fetchMovies()
+        }
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.searchBar}>
@@ -21,7 +27,7 @@ const SearchBar = ({ input, setInput, fetchMovies }) => {
                     placeholderTextColor={colors.gray}
                 />
             </View>
-            <TouchableOpacity style={styles.iconButton} onPress={fetchMovies}>
+            <TouchableOpacity style={styles.iconButton} onPress={handleSearch}>
                 <Icon name='search' color={colors.white} size={25} />
             </TouchableOpacity>
         </View>
