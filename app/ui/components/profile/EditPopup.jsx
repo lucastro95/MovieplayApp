@@ -22,9 +22,9 @@ const EditPopup = ({ visible, onClose, onSave, fieldToEdit, user }) => {
     const handleSave = () => {
         onSave(name, lastname, nickname);
         onClose();
-        setName("");
-        setLastname("");
-        setNickname("");
+        setName(user.givenName);
+        setLastname(user.familyName);
+        setNickname(user.nickName);
     };
 
     return (
