@@ -45,13 +45,13 @@ const EditPopup = ({ visible, onClose, onSave, fieldToEdit, user }) => {
                             <TextInput
                                 style={styles.input}
                                 placeholder={I18n.t('profile.name')}
-                                value={name}
+                                value={user.name}
                                 onChangeText={setName}
                             />
                             <TextInput
                                 style={styles.input}
                                 placeholder={I18n.t('profile.lastName')}
-                                value={lastname}
+                                value={user.lastname}
                                 onChangeText={setLastname}
                             />
                         </>
@@ -59,7 +59,7 @@ const EditPopup = ({ visible, onClose, onSave, fieldToEdit, user }) => {
                         <TextInput
                             style={styles.input}
                             placeholder={I18n.t('profile.nickname')}
-                            value={nickname}
+                            value={user.nickname}
                             onChangeText={setNickname}
                         />
                     }
