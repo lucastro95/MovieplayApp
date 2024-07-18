@@ -14,8 +14,9 @@ const UserPhoto = ({ user, setPendingUpdate }) => {
     const YOUR_CLOUD_NAME = 'dq7tfnrso';
     const YOUR_UPLOAD_PRESET = 'd0znkzh9';
 
+
     const getImageSource = () => {
-        return user.photo ? { uri: user.photo } : placeholder;
+        return user.photo !== "null" ? { uri: user.photo } : placeholder;
     };
 
 
